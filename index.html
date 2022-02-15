@@ -11,18 +11,13 @@
 </head>
 <body>
   <div id="app"></div>
-  <script>
-    window.$docsify = {
-      name: '',
-      repo: ''
-    }
-  </script>
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- docsify-edit-on-github -->
   <script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
-
-  <!-- <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script> -->
   <script>
+    // 离线支持
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('sw.js')
+    }
     window.$docsify = {
       name: 'Pine Script v5 用户手册',
       repo: 'https://github.com/unknown-marketwizards/pine_script_docs_zh.git',
@@ -30,10 +25,10 @@
       subMaxLevel: 3,
       loadSidebar: true,
       auto2top: true,//切换页面后是否自动跳转到页面顶部
-      homepage: 'introduction.md',
+      homepage: '1_Welcome/Introduction.md',
       // coverpage: true,
       plugins: [
-        EditOnGithubPlugin.create('https://github.com/unknown-marketwizards/pine_script_docs_zh/master/')
+        EditOnGithubPlugin.create('https://github.com/unknown-marketwizards/pine_script_docs_zh/blob/main/')
       ],
       search: {
         //maxAge: 86400000, // 过期时间，单位毫秒，默认一天
@@ -43,17 +38,23 @@
         // 搜索标题的最大程级, 1 - 6
         depth: 6,
       },
+      toc: {
+          tocMaxLevel: 5,
+          target: 'h2, h3, h4, h5, h6'
+      },
     }
-  //   window.$docsify = {
-  //   loadSidebar: true
-  // }
+    
   </script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/docsify@4"></script> -->
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
    <!--全文搜索,直接用官方提供的无法生效-->
- <script src="https://cdn.bootcss.com/docsify/4.5.9/plugins/search.min.js"></script>
+  <script src="https://cdn.bootcss.com/docsify/4.5.9/plugins/search.min.js"></script>
    <!-- 复制到剪贴板 -->
   <script src="//unpkg.com/docsify-copy-code"></script>
   <!-- 图片缩放 -->
-<script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <!-- 右侧目录 -->
+  <script src="//unpkg.com/docsify-plugin-toc"></script>
 </body>
 </html>

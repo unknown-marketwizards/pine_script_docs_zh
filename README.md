@@ -14,10 +14,11 @@
 
 
 
-## 如何一起翻译
+## 如何一起翻译？
 
 （环境可以选择性搭建）
 
+1. 克隆本库
 1. 在`_sidebar.md`中创建对应目录然后新建md文件
 2. 对照[Pine Script 5 ](https://www.tradingview.com/pine-script-docs/en/v5/index.html)翻译文档
 3. 提交pr
@@ -26,15 +27,17 @@
 
 
 
-## 如何在本地运行？
+## 如何在本地运行？（环境搭建）
 
 ### 环境
 
-- nodejs
+- nodejs或python
 
-### 步骤：
+### 步骤(2选1)：
 
-1.  克隆下载本库
+#### nodejs环境
+
+1.  克隆本库
 2.  安装docsify
 
 ```bash
@@ -44,10 +47,31 @@ npm i docsify-cli -g
 3. 预览
 
 ```bash
-docsify serve docs
+cd pine_script_docs_zh && docsify serve
 ```
 
 在浏览器中输入网址
+
+`http://localhost:3000`
+
+#### Python环境
+
+1. 克隆本库
+2. 启动http服务
+
+- python3：
+
+```bash
+cd pine_script_docs_zh && python -m http.server 3000
+```
+
+- python2
+
+```bash
+cd pine_script_docs_zh && python -m SimpleHTTPServer 3000
+```
+
+3. 在浏览器中输入网址
 
 `http://localhost:3000`
 
@@ -55,9 +79,11 @@ docsify serve docs
 
 ## 链接
 
-[docsify英文版文档](https://docsify.js.org/#/quickstart)
+[Pine Script 5 User Manual ](https://www.tradingview.com/pine-script-docs/en/v5/index.html)
 
 [docsify中文版文档](https://docsify.js.org/#/zh-cn/)
 
-[Pine Script 5 User Manual ](https://www.tradingview.com/pine-script-docs/en/v5/index.html)
+[docsify英文版文档](https://docsify.js.org/#/quickstart)
+
+
 

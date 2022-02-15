@@ -1,6 +1,9 @@
-* [简介](introduction.md)
+* [简介](1_Welcome/Introduction.md)
 * 入门
-  * [初识](first-steps.md)
-  * [第一个指标](first-indicator.md)
-  * [下一步](next-steps.md)
+  * [初识](2_Pine-primer/First_steps.md)
+  * [第一个指标](2_Pine-primer/First_indicator.md)
+  * [下一步](2_Pine-primer/Next_steps.md)
 * 语言
+  * [执行模型](3_Language/Execution_model.md)
+  * [时间序列](3_Language/Time_series.md)
+  * [脚本结构](3_Language/Script_structure.md)
