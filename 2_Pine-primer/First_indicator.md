@@ -147,4 +147,4 @@ plot(signalLine, color = color.orange)
 
 ## 接下来
 
-我们现在建议你去我们的[下一步](Next_steps.md)页面。
+我们现在建议你去我们的[下一步](2_Pine-primer/Next_steps.md)页面。
