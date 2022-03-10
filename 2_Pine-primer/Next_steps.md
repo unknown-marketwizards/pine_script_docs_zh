@@ -20,7 +20,7 @@ Pine脚本不像许多编程语言中的程序，执行一次就停止了。在P
 
 ## 时间序列
 
-Pine脚本中使用的主要数据结构被称为[时间序列](https://www.tradingview.com/pine-script-docs/en/v5/language/Time_series.html#pagetimeseries)。时间序列对脚本执行的每一个柱状体都包含一个值，所以当脚本在更多的柱状体上执行时，它们会不断扩展。时间序列过去的值可以用Pine的历史引用操作符来引用，例如：[[\]](https://www.tradingview.com/pine-script-reference/v5/#op_[]).close[1]，指的是在执行脚本中前一个k线的[close](https://www.tradingview.com/pine-script-reference/v5/#var_close)的值。
+Pine脚本中使用的主要数据结构被称为[时间序列](https://www.tradingview.com/pine-script-docs/en/v5/language/Time_series.html#pagetimeseries)。时间序列对脚本执行的每一个柱状体都包含一个值，所以当脚本在更多的柱状体上执行时，它们会不断扩展。时间序列过去的值可以用Pine的历史引用操作符来引用，例如：[[]](https://www.tradingview.com/pine-script-reference/v5/#op_[]).close[1]，指的是在执行脚本中前一个k线的[close](https://www.tradingview.com/pine-script-reference/v5/#var_close)的值。
 
 虽然这种索引机制可能会让很多程序员联想到数组，但是时间序列是不同的，用数组的方式思考将不利于理解这个关键的Pine概念。对[执行模型](https://www.tradingview.com/pine-script-docs/en/v5/language/Execution_model.html#pageexecutionmodel)和[时间序列](https://www.tradingview.com/pine-script-docs/en/v5/language/Time_series.html#pagetimeseries)的良好理解是理解Pine脚本如何工作的关键。如果你以前从未处理过以时间序列组织的数据，你将需要练习使它们为你工作。一旦你熟悉了这些关键的概念，你就会发现，通过将时间序列的使用与我们设计的内置函数相结合，只需很少的几行Pine代码就可以完成很多工作。
 
