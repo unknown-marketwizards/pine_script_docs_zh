@@ -7,3 +7,5 @@
   * [执行模型](3_Language/Execution_model.md)
   * [时间序列](3_Language/Time_series.md)
   * [脚本结构](3_Language/Script_structure.md)
+  * [标识符](3_Language/Identifiers.md)
+  * [运算符](3_Language/Operators.md)
