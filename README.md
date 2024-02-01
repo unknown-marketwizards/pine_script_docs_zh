@@ -107,7 +107,7 @@ cd pine_script_docs_zh && python -m SimpleHTTPServer 3000
 | 3_Language/Script_structure.md       | Dylan | ✓    |       |       |
 | 3_Language/Identifiers.md            | Dylan | ✓    |       |       |
 | 3_Language/Operators.md              | Dylan | ✓    |       |       |
-| 3_Language/Variable_declarations.md  |       |      |       |       |
+| 3_Language/Variable_declarations.md  | Dylan |      |       |       |
 | 3_Language/Conditional_structures.md |       |      |       |       |
 | 3_Language/Loops.md                  |       |      |       |       |
 | 3_Language/Type_system.md            |       |      |       |       |

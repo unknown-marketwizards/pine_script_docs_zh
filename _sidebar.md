@@ -9,3 +9,4 @@
   * [脚本结构](3_Language/Script_structure.md)
   * [标识符](3_Language/Identifiers.md)
   * [运算符](3_Language/Operators.md)
+  * [变量声明](3_Language/Variable_declarations.md)
