@@ -14,7 +14,7 @@
 <body>
   <div id="app"></div>
   <!-- docsify-edit-on-github -->
-  <script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
   <script>
     // 离线支持
     if (typeof navigator.serviceWorker !== 'undefined') {
@@ -25,13 +25,16 @@
       name: 'Pine Script v5 用户手册',
       repo: 'https://github.com/unknown-marketwizards/pine_script_docs_zh.git',
       maxLevel: 5,//最大支持渲染的标题层级
-      subMaxLevel: 2,
+      subMaxLevel: 3,
+      sidebarDisplayLevel: 0,
       loadSidebar: true,
       auto2top: true,//切换页面后是否自动跳转到页面顶部
       homepage: '1_Welcome/Introduction.md',
       // coverpage: true,
       plugins: [
-        EditOnGithubPlugin.create('https://github.com/unknown-marketwizards/pine_script_docs_zh/blob/main/')
+        EditOnGithubPlugin.create(
+          'https://github.com/unknown-marketwizards/pine_script_docs_zh/blob/main/',null,"点此进入Github编辑此页面"
+        )
       ],
       search: {
         //maxAge: 86400000, // 过期时间，单位毫秒，默认一天
@@ -49,6 +52,10 @@
       // },
       alias: {
       '/.*/_sidebar.md': '/_sidebar.md'
+      },
+      hideCode: {
+          scroll: false, // 启用滚动
+          height: 300 // 折叠高度
       }
     }
 
@@ -65,5 +72,9 @@
   <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <!-- 右侧目录 -->
   <!-- <script src="https://unpkg.com/docsify-toc@1.0.0/dist/toc.js"></script> -->
+  <!-- 代码折叠 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-hide-code/dist/docsify-hide-code.min.js"></script>
+  <!-- 目录折叠 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 </body>
 </html>
