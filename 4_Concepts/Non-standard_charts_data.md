@@ -14,9 +14,8 @@ ticker.heikinashi [()](https://www.tradingview.com/pine-script-reference/v5/#fun
 
 ![../_images/NonStandardCharts-TickerHeikinAshi-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/NonStandardCharts-TickerHeikinAshi-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("HA Close", "", true)
 haTicker = ticker.heikinashi(syminfo.tickerid)
 haClose = request.security(haTicker, timeframe.period, close)
@@ -32,9 +31,8 @@ plot(haClose, "HA Close", color.black, 3)
 
 ![../_images/NonStandardCharts-TickerHeikinAshi-02.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/NonStandardCharts-TickerHeikinAshi-02.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("HA Close", "", true)
 regularSessionTicker = ticker.new(syminfo.prefix, syminfo.ticker, session.regular)
 haTicker = ticker.heikinashi(regularSessionTicker)
@@ -53,9 +51,8 @@ plot(haClose, "HA Close", color.black, 3, plot.style_linebr)
 
 ![../_images/NonStandardCharts-TickerHeikinAshi-03.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/NonStandardCharts-TickerHeikinAshi-03.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Heikin-Ashi candles")
 CANDLE_GREEN = #26A69A
 CANDLE_RED   = #EF5350
@@ -75,9 +72,8 @@ plotcandle(haO, haH, haL, haC, color = candleColor)
 
 *砖形*图仅绘制价格变动，而不考虑时间或交易量。它们看起来就像堆叠在相邻列中的砖块[[1\]](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Non-standard_charts_data.html#ticks)。仅当价格超过顶部或底部预定金额后才会绘制新砖。 ticker.renko [()](https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}renko) 函数创建一个股票代码 id，可与 [request.security()](https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security)一起使用 来获取砖形图值，但没有 Pine Script™ 函数可以在图表上绘制砖形图：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 renkoTicker = ticker.renko(syminfo.tickerid, "ATR", 10)
 renkoLow = request.security(renkoTicker, timeframe.period, low)
@@ -88,9 +84,8 @@ plot(renkoLow)
 
 折线图表*类型*显示一系列基于价格变化的垂直框[[1\]](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Non-standard_charts_data.html#ticks)。 ticker.linebreak [()](https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}linebreak) 函数创建一个股票代码 id，可与 [request.security()](https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security)一起使用 来获取“换行符”值，但没有 Pine Script™ 函数可以在图表上绘制此类条形：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 lineBreakTicker = ticker.linebreak(syminfo.tickerid, 3)
 lineBreakClose = request.security(lineBreakTicker, timeframe.period, close)
@@ -101,9 +96,8 @@ plot(lineBreakClose)
 
 *卡吉*图由改变方向的连续线组成。当价格变化[[1\]](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Non-standard_charts_data.html#ticks) 超出预定金额时，方向就会发生变化。 ticker.kagi [()](https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}kagi) 函数创建一个股票代码 id，可与 [request.security()](https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security)一起使用 来获取“Kagi”值，但没有 Pine Script™ 函数可以在图表上绘制此类条形：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 kagiBreakTicker = ticker.linebreak(syminfo.tickerid, 3)
 kagiBreakClose = request.security(kagiBreakTicker, timeframe.period, close)
@@ -114,9 +108,8 @@ plot(kagiBreakClose)
 
 *点数图*(PnF) 图表仅绘制价格变动[[1\]](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Non-standard_charts_data.html#ticks)，而不考虑时间。当价格上涨时绘制 X 列，当价格下跌时绘制 O 列。 ticker.pointfigure [()](https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}pointfigure) 函数创建一个股票代码 id，可与 [request.security()](https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security)一起使用 来获取“PnF”值，但没有 Pine Script™ 函数可以在图表上绘制此类条形。每列 X 或 O 都由四个数字表示。您可以将它们视为合成的 OHLC PnF 值：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 pnfTicker = ticker.pointfigure(syminfo.tickerid, "hl", "ATR", 14, 3)
 [pnfO, pnfC] = request.security(pnfTicker, timeframe.period, [open, close], barmerge.gaps_on)

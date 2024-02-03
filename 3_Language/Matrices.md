@@ -16,9 +16,8 @@ Pine Script™ 矩阵是以矩形格式存储值引用的集合。它们本质�
 
 Pine Script™ 使用以下语法进行矩阵声明：
 
-```
-Pine Script™
-Copied[var/varip ][matrix<type> ]<identifier> = <expression>
+```javascript
+[var/varip ][matrix<type> ]<identifier> = <expression>
 ```
 
 其中`<type>`是矩阵的[类型模板](https://www.tradingview.com/pine-script-docs/en/v5/language/Type_system.html#pagetypesystem-typetemplates)，声明它将包含的值的类型，并且`<expression>`返回类型 或 的矩阵实例`na`。
@@ -27,18 +26,16 @@ Copied[var/varip ][matrix<type> ]<identifier> = <expression>
 
 该行声明了一个`myMatrix`值为 的新变量`na`。它将变量显式声明为 `matrix<float>`，这告诉编译器该变量只能接受 包含[浮点值的](https://www.tradingview.com/pine-script-reference/v5/#op_float)[矩阵](https://www.tradingview.com/pine-script-reference/v5/#op_matrix)对象 ：
 
-```
-Pine Script™
-Copiedmatrix<float> myMatrix = na
+```javascript
+matrix<float> myMatrix = na
 ```
 
 当矩阵变量未分配给 时`na`，[矩阵](https://www.tradingview.com/pine-script-reference/v5/#op_matrix) 关键字及其类型模板是可选的，因为编译器将使用变量引用的对象中的类型信息。
 
 在这里，我们声明一个`myMatrix`变量引用一个`matrix<float>`具有两行、两列和`initial_value`0 的新实例。在这种情况下，该变量从新对象获取其类型信息，因此不需要显式类型声明：
 
-```
-Pine Script™
-CopiedmyMatrix = matrix.new<float>(2, 2, 0.0)
+```javascript
+myMatrix = matrix.new<float>(2, 2, 0.0)
 ```
 
 
@@ -51,9 +48,8 @@ CopiedmyMatrix = matrix.new<float>(2, 2, 0.0)
 
 ![../_images/Matrices-声明-矩阵-使用-var-and-varip-keywords-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Declaring-a-matrix-Using-var-and-varip-keywords-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("var matrix demo")
 
 //@variable A 1x2 rectangular matrix declared only at `bar_index == 0`, i.e., the first bar.
@@ -87,9 +83,8 @@ plot(m.get(0, 0), linewidth = 3) // Plot the value from the first row and column
 
 ![../_images/Matrices-Read-and-writing-matrix-elements-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Reading-and-writing-matrix-elements-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Reading and writing elements demo")
 
 //@variable A 2x2 square matrix of `float` values.
@@ -113,9 +108,8 @@ plot(m.get(1, 1), "Row 1, Column 1 Value", color.blue, 2)
 
 要使用特定值覆盖所有矩阵元素，请使用 [matrix.fill()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.fill)。该函数将整个矩阵中或索引范围内的所有项目`from_row/column`指向 `to_row/column`调用`value`中指定的。例如，此代码片段声明一个 4x4 方阵，然后用 [随机](https://www.tradingview.com/pine-script-reference/v5/#fun_math.random)值填充其元素：
 
-```
-Pine Script™
-CopiedmyMatrix = matrix.new<float>(4, 4)
+```javascript
+myMatrix = matrix.new<float>(4, 4)
 myMatrix.fill(math.random())
 ```
 
@@ -125,9 +119,8 @@ myMatrix.fill(math.random())
 
 ![../_images/Matrices-Read-and-writing-matrix-elements-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Reading-and-writing-matrix-elements-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Object matrix fill demo")
 
 //@variable A 4x4 label matrix.
@@ -160,9 +153,8 @@ m.get(3, 3).set_text(str.format("Total labels on the chart: {0}", numLabels))
 
 ![../_images/矩阵-行和列-Retriving-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Rows-and-columns-Retrieving-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Retrieving rows and columns demo")
 
 //@variable A 3x2 rectangular matrix.
@@ -197,9 +189,8 @@ debugLabel.set_text(str.format("Row 0: {0}, Size: {1}\nCol 0: {2}, Size: {3}", r
 
 ![../_images/矩阵-行和列-检索-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Rows-and-columns-Retrieving-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Retrieving rows and columns demo")
 
 //@variable A 3x2 rectangular matrix.
@@ -234,9 +225,8 @@ plot(m.get(0, 0), linewidth = 3)
 
 此脚本包含一个自定义`myUDT`类型，其中包含`value`一个初始值为 0 的字段。它声明一个 1x1`m`矩阵来保存`myUDT`第一个柱上的单个实例，然后调用`m.row(0)`将矩阵的第一行复制为[array](https://www.tradingview.com/pine-script-reference/v5/#op_array)。在每个图表条上，脚本将 1 添加到`value`第一个`row`数组元素的字段。在这种情况下，`value`矩阵元素的字段也会在每个条上增加，因为两个元素引用相同的对象：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Row with reference types demo")
 
 //@type A custom type that holds a float value.
@@ -267,9 +257,8 @@ plot(m.get(0, 0).value, linewidth = 3) // Plot the `value` of the `myUDT` object
 
 ![../_images/矩阵-行和列-插入-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Rows-and-columns-Inserting-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Rows and columns demo")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -329,9 +318,8 @@ if bar_index == last_bar_index - 1
 
 对于此示例，我们将这些代码行添加到 [上面部分](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#pagematrices-rowsandcolumns-inserting)中的“行和列演示”脚本中：
 
-```
-Pine Script™
-Copied// Removing example
+```javascript
+// Removing example
 
     // Remove the first row and last column from the matrix. `m` will now have 3 rows and 3 columns.
     m.remove_row(0)
@@ -350,9 +338,8 @@ m`此代码使用 [m.remove_row()](https://www.tradingview.com/pine-script-refer
 
 让我们将以下行添加到[前面的示例](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#pagematrices-rowsandcolumns-removing)中，这些行交换 的第一行和最后一行`m`并在标签中显示更改：`bar_index + 40`
 
-```
-Pine Script™
-Copied// Swapping example
+```javascript
+// Swapping example
 
     // Swap the first and last row. `m` retains the same dimensions.
     m.swap_rows(0, 2)
@@ -373,9 +360,8 @@ Copied// Swapping example
 
 ![../_images/矩阵-行和列-Replacing-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Rows-and-columns-Replacing-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Replacing rows demo")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -420,20 +406,18 @@ if bar_index == last_bar_index - 1
 
 
 
-### [`为了](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#id14)
+### [`for`](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#id14)
 
 当脚本只需要迭代矩阵中的行/列索引时，最常见的方法是使用 [for](https://www.tradingview.com/pine-script-reference/v5/#op_for)循环。例如，此行创建一个循环，`row`其值从 0 开始并增加 1，直到达到比矩阵中的行数`m`（即最后一行索引）少 1 为止：
 
-```
-Pine Script™
-Copiedfor row = 0 to m.rows() - 1
+```javascript
+for row = 0 to m.rows() - 1
 ```
 
 要迭代`m`矩阵中的所有索引值，我们可以创建一个*嵌套*循环，迭代每个值`column`的每个索引`row`：
 
-```
-Pine Script™
-Copiedfor row = 0 to m.rows() - 1
+```javascript
+for row = 0 to m.rows() - 1
     for column = 0 to m.columns() - 1
 ```
 
@@ -443,9 +427,8 @@ Copiedfor row = 0 to m.rows() - 1
 
 ![../_images/Matrices-Looping-through-a-matrix-For-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Looping-through-a-matrix-For-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("for loop demo", "Matrix to table")
 
 //@function Displays the elements of `this` matrix in a table.
@@ -499,13 +482,12 @@ if bar_index == 0
 
 
 
-### [`对于…在](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#id15)
+### [`for...in`](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#id15)
 
 当脚本需要迭代并检索矩阵的行时，使用 [for...in](https://www.tradingview.com/pine-script-reference/v5/#op_for{dot}{dot}{dot}in) 结构通常优于标准`for`循环。此结构直接引用矩阵中的行[数组](https://www.tradingview.com/pine-script-docs/en/v5/language/Arrays.html#pagearrays)，使其成为此类用例的更方便的选择。例如，此行创建一个循环，`row`为矩阵中的每一行返回一个数组`m`：
 
-```
-Pine Script™
-Copiedfor row in m
+```javascript
+for row in m
 ```
 
 以下指标通过输入计算 OHLC 数据的移动平均值，`length`并将值显示在图表上。自定义`rowWiseAvg()`方法使用结构体循环遍历矩阵的行，以生成包含每个 的[array.avg()](https://www.tradingview.com/pine-script-reference/v5/#fun_array.avg)的`for...in`数组。`row`
@@ -514,9 +496,8 @@ Copiedfor row in m
 
 ![../_images/Matrices-Looping-through-a-matrix-For-in-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Looping-through-a-matrix-For-in-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("for...in loop demo", "Average OHLC", overlay = true)
 
 //@variable The number of terms in the average.
@@ -567,9 +548,8 @@ Pine脚本可以通过[matrix.copy()](https://www.tradingview.com/pine-script-re
 
 ![../_images/Matrices-复制-a-matrix-Shallow-copies-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Copying-a-matrix-Shallow-copies-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Shallow copy demo")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -611,9 +591,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Matrices-复制-a-matrix-Shallow-copies-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Copying-a-matrix-Shallow-copies-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Shallow copy demo")
 
 //@variable Initial value of the original matrix elements.
@@ -648,9 +627,8 @@ plot(label.all.size(), linewidth = 3)
 
 ![../_images/Matrices-复制-a-matrix-Deep-copies-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Copying-a-matrix-Deep-copies-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Deep copy demo")
 
 //@function Returns a deep copy of a label matrix.
@@ -698,9 +676,8 @@ plot(label.all.size(), linewidth = 3)
 
 ![../_images/Matrices-复制-a-matrix-Submatrices-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Copying-a-matrix-Submatrices-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Submatrix demo")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -747,9 +724,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Matrices-Scope-and-history-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Scope-and-history-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Scope and history demo", "Bar ratio comparison")
 
 int length = input.int(10, "Length", 1)
@@ -836,9 +812,8 @@ infoTable.cell(2, 0, str.format("{0} bars ago", length), text_color = color.whit
 
 ![../_images/Matrices-Inspecting-a-matrix-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Inspecting-a-matrix-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Matrix inspection demo")
 
 //@function Inspects a matrix using `matrix.is_*()` functions and returns a `string` describing some of its features.
@@ -901,9 +876,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Matrices-Manipulated-a-matrix-Reshaping-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Manipulating-a-matrix-Reshaping-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Reshaping example")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -958,9 +932,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Matrices-Manipulated-a-matrix-Reversing-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Manipulating-a-matrix-Reversing-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Reversing demo")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -1008,9 +981,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/矩阵-操作-a-矩阵-转置-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Manipulating-a-matrix-Transposing-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Transpose example")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -1057,9 +1029,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Matrices-Manipulated-a-matrix-Sorting-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Manipulating-a-matrix-Sorting-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Sorting rows example")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -1106,9 +1077,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Matrices-Manipulated-a-matrix-Sorting-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Manipulating-a-matrix-Sorting-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Sorting columns example")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -1165,9 +1135,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Matrices-Manipulated-a-matrix-Concatenating-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Manipulating-a-matrix-Concatenating-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Concatenation demo")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -1223,9 +1192,8 @@ Pine脚本可以通过 [matrix.avg()](https://www.tradingview.com/pine-script-re
 
 ![../_images/Matrices-Matrix-calculations-Element-wise-calculations-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Matrix-calculations-Element-wise-calculations-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Element-wise calculations example", "Developing values", overlay = true)
 
 //@variable The number of data points in the averages.
@@ -1294,9 +1262,8 @@ Pine Script™ 具有多个用于执行基本矩阵算术和线性代数运算�
 
 ![../_images/Matrices-Matrix-calculations-Special-calculations-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Matrix-calculations-Special-calculations-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Matrix sum and diff example")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -1350,9 +1317,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Matrices-Matrix-calculations-Special-calculations-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Matrix-calculations-Special-calculations-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Matrix mult example")
 
 //@function Displays the rows of a matrix in a label with a note.
@@ -1413,9 +1379,8 @@ if bar_index == last_bar_index - 1
 
 在此脚本中，我们定义了`m`保存这三个方程的系数和常数的矩阵：
 
-```
-Pine Script™
-Copied3 * x0 + 4 * x1 - 1 * x2 = 8
+```javascript
+3 * x0 + 4 * x1 - 1 * x2 = 8
 5 * x0 - 2 * x1 + 1 * x2 = 4
 2 * x0 - 2 * x1 + 1 * x2 = 1
 ```
@@ -1424,9 +1389,8 @@ Copied3 * x0 + 4 * x1 - 1 * x2 = 8
 
 ![../_images/Matrices-Matrix-calculations-Special-calculations-3.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Matrix-calculations-Special-calculations-3.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Determinants example", "Cramer's Rule")
 
 //@function Solves a system of linear equations with a matching number of unknowns using Cramer's rule.
@@ -1490,9 +1454,8 @@ plot(solutions.get(2), "x2", color.blue, 3)  // Plots 3.
 
 ![../_images/Matrices-Matrix-calculations-Special-calculations-4.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Matrix-calculations-Special-calculations-4.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Inverse example")
 
 // Element inputs for the 2x2 matrix.
@@ -1555,9 +1518,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Matrices-Matrix-calculations-Special-calculations-5.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Matrices-Matrix-calculations-Special-calculations-5.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Matrix rank example")
 
 //@variable A 3x3 full-rank matrix.
@@ -1600,9 +1562,8 @@ plot(m2.rank(), color = color.red, linewidth = 3)
 
 例如，此代码包含两行将产生此运行时错误。 m.set [()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.set)方法引用了`row` 不存在的索引 (2)。 m.submatrix [()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.submatrix) 方法引用直到 的所有列索引。值4 会导致运行时错误，因为引用的最后一个列索引 (3) 不存在于：`to_column - 1``to_column``m`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Out of bounds demo")
 
 //@variable A 2x3 matrix with a max row index of 1 and max column index of 2.
@@ -1623,9 +1584,8 @@ if bar_index == last_bar_index - 1
 
 当使用[matrix.add_row()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.add_row) 和[matrix.add_col()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.add_col)函数将 行和列[插入](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#pagematrices-rowsandcolumns-inserting)非空矩阵时，插入数组的大小必须与矩阵维度对齐。插入的行的大小必须与列的数量匹配，并且插入的列的大小必须与行的数量匹配。否则，脚本将引发此运行时错误。例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Invalid array size demo")
 
 // Declare an empty matrix.
@@ -1647,9 +1607,8 @@ plot(m.col(0).get(1))
 
 当矩阵变量被分配给 时`na`，意味着该变量不引用现有对象。因此，不能使用内置`matrix.*()`函数和方法。例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("na matrix methods demo")
 
 //@variable A `matrix` variable assigned to `na`.
@@ -1669,9 +1628,8 @@ if bar_index == last_bar_index - 1
 
 [矩阵 ( matrix.elements_count()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.elements_count) )中的元素总数不能超过**100,000**，无论其形状如何。例如，此脚本将引发错误，因为它将 包含 101 个元素的 1000 行[插入](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#pagematrices-rowsandcolumns-inserting)`m`到矩阵中：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Matrix too large demo")
 
 var matrix<float> m = matrix.new<float>()
@@ -1693,9 +1651,8 @@ plot(m.get(0, 0))
 
 例如，此脚本显示尝试 从 4x4矩阵声明一个值为 2 和值为 2 的[子矩阵](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#pagematrices-copyingamatrix-submatrices)，这将导致错误：`m``from_row``to_row`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Invalid from_row, to_row demo")
 
 //@variable A 4x4 matrix filled with a random value.
@@ -1712,9 +1669,8 @@ plot(mSub.get(0, 0))
 
 使用[matrix.sum() 和matrix.diff()](https://www.tradingview.com/pine-script-docs/en/v5/language/Matrices.html#pagematrices-matrixcalculations-specialcalculations-matrixsumandmatrixdiff) 函数时，`id1`和`id2`矩阵必须具有相同的行数和相同的列数。尝试对两个维度不匹配的矩阵进行相加或相减将会引发错误，如以下代码所示：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Invalid sum dimensions demo")
 
 //@variable A 2x3 matrix.
@@ -1735,9 +1691,8 @@ plot(mSum.get(0, 0))
 
 例如，此脚本尝试将两个 2x3 矩阵相乘。虽然可以将这些矩阵*相加*，但不能将它们*相乘：*
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Invalid mult dimensions demo")
 
 //@variable A 2x3 matrix.
@@ -1756,9 +1711,8 @@ plot(mSum.get(0, 0))
 
 一些矩阵运算，包括[matrix.inv()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.inv)、 [matrix.det()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.det)、 [matrix.eigenvalues()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.eigenvalues)和[matrix.eigenvectors()](https://www.tradingview.com/pine-script-reference/v5/#fun_matrix.inv) 仅适用于**方阵**，即具有相同行数和列数的矩阵。当尝试在非方阵上执行此类函数时，脚本将引发错误，指出该操作不可用或无法计算矩阵的结果`id`。例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Non-square demo")
 
 //@variable A 3x5 matrix.

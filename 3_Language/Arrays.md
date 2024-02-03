@@ -22,9 +22,8 @@ Pine Script™ 数组是可以保存多个值引用的一维集合。将它们�
 
 Pine Script™ 使用以下语法来声明数组：
 
-```
-Pine Script™
-Copied[var/varip ][array<type>/<type[]> ]<identifier> = <expression>
+```javascript
+[var/varip ][array<type>/<type[]> ]<identifier> = <expression>
 ```
 
 其中`<type>`是数组的[类型模板](https://www.tradingview.com/pine-script-docs/en/v5/language/Type_system.html#pagetypesystem-typetemplates)，声明它将包含的值的类型，并且`<expression>`返回指定类型的数组或`na`.
@@ -35,23 +34,20 @@ Copied[var/varip ][array<type>/<type[]> ]<identifier> = <expression>
 
 这行代码声明了一个名为 的数组变量，`prices`该变量指向`na`.在这种情况下，我们必须指定类型来声明变量可以引用包含“float”值的数组：
 
-```
-Pine Script™
-Copiedarray<float> prices = na
+```javascript
+array<float> prices = na
 ```
 
 我们还可以将上面的例子写成这样的形式：
 
-```
-Pine Script™
-Copiedfloat[] prices = na
+```javascript
+float[] prices = na
 ```
 
 声明数组且`<expression>`is not时`na`，请使用以下函数之一： [array.new(size, initial_value)](https://www.tradingview.com/pine-script-reference/v5/#fun_array.new)、 [array.from()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from)或[array.copy()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}copy)。对于函数，和参数的参数可以是“系列”，以允许动态调整数组元素的大小和初始化。以下示例创建一个包含零个“float”元素的数组，这次，将[array.new()](https://www.tradingview.com/pine-script-reference/v5/#fun_array.new) 函数调用返回的数组 ID 分配给：`array.new<type>(size, initial_value)``size``initial_value``prices`
 
-```
-Pine Script™
-Copiedprices = array.new<float>(0)
+```javascript
+prices = array.new<float>(0)
 ```
 
 笔记
@@ -62,18 +58,16 @@ Copiedprices = array.new<float>(0)
 
 此行声明一个名为 的数组 ID，该数组 ID`prices`指向包含两个元素的数组，每个元素都分配给条的 `close`值：
 
-```
-Pine Script™
-Copiedprices = array.new<float>(2, close)
+```javascript
+prices = array.new<float>(2, close)
 ```
 
 要创建数组并使用不同的值初始化其元素，请使用 [array.from()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from)。该函数根据函数调用中的参数推断数组的大小和它将保存的元素类型。与`array.new*`函数一样，它接受“系列”参数。提供给函数的所有值必须具有相同的类型。
 
 例如，所有这三行代码将创建具有相同两个元素的相同“bool”数组：
 
-```
-Pine Script™
-CopiedstatesArray = array.from(close > open, high != close)
+```javascript
+statesArray = array.from(close > open, high != close)
 bool[] statesArray = array.from(close > open, high != close)
 array<bool> statesArray = array.from(close > open, high != close)
 ```
@@ -86,9 +80,8 @@ array<bool> statesArray = array.from(close > open, high != close)
 
 当使用这些关键字声明数组变量并将新值推入每个柱上引用数组的末尾时，该数组将在每个柱上增长一，并且在脚本执行时其大小（bar_index[从零开始](https://www.tradingview.com/pine-script-reference/v5/#var_bar_index) ）最后一栏，如以下代码所示：`bar_index + 1`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Using `var`")
 //@variable An array that expands its size by 1 on each bar.
 var a = array.new<float>(0)
@@ -117,9 +110,8 @@ if barstate.islast
 
 ![../_images/Arrays-ReadingAndWriting-DistanceFromHigh.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-ReadingAndWriting-DistanceFromHigh.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Distance from high", "", true)
 lookbackInput = input.int(100)
 FILL_COLOR = color.green
@@ -147,9 +139,8 @@ plotchar(fillNo, "fillNo", "", location.top, size = size.tiny)
 
 初始化数组中元素的另一种技术是创建一个*空数组*（没有元素的数组），然后使用[array.push()将](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}push)**新**元素追加 到数组末尾，从而将数组的大小增加一每次通话。以下代码在功能上与前面脚本中的初始化部分相同：
 
-```
-Pine Script™
-Copied// Declare array and set its values on the first bar only.
+```javascript
+// Declare array and set its values on the first bar only.
 var fillColors = array.new<color>(0)
 if barstate.isfirst
     // Initialize the array elements with progressively lighter shades of the fill color.
@@ -162,9 +153,8 @@ if barstate.isfirst
 
 此代码与上面的代码等效，但它使用[array.unshift()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}unshift)在数组的*开头* 插入新元素`fillColors`：
 
-```
-Pine Script™
-Copied// Declare array and set its values on the first bar only.
+```javascript
+// Declare array and set its values on the first bar only.
 var fillColors = array.new<color>(0)
 if barstate.isfirst
     // Initialize the array elements with progressively lighter shades of the fill color.
@@ -177,9 +167,8 @@ if barstate.isfirst
 
 我们还可以使用[array.from()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from)`fillColors`通过单个函数调用创建相同的数组：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Using `var`")
 FILL_COLOR = color.green
 var array<color> fillColors = array.from(
@@ -195,24 +184,21 @@ bgcolor(array.get(fillColors, bar_index % (fillColors.size())))
 
 array.fill [(id, value, index_from, index_to)](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}fill)`index_from`函数将所有数组元素或to范围 内的元素`index_to`指向指定的`value`。如果没有最后两个可选参数，该函数将填充整个数组，因此：
 
-```
-Pine Script™
-Copieda = array.new<float>(10, close)
+```javascript
+a = array.new<float>(10, close)
 ```
 
 和：
 
-```
-Pine Script™
-Copieda = array.new<float>(10)
+```javascript
+a = array.new<float>(10)
 a.fill(close)
 ```
 
 是等价的，但是：
 
-```
-Pine Script™
-Copieda = array.new<float>(10)
+```javascript
+a = array.new<float>(10)
 a.fill(close, 1, 3)
 ```
 
@@ -224,9 +210,8 @@ a.fill(close, 1, 3)
 
 当循环遍历数组的元素索引并且数组的大小未知时，可以使用 [array.size()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}size)函数来获取最大索引值。例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Protected `for` loop", overlay = true)
 //@variable An array of `close` prices from the 1-minute timeframe.
 array<float> a = request.security_lower_tf(syminfo.tickerid, "1", close)
@@ -245,9 +230,8 @@ label.new(bar_index, high, text = labelText)
 
 循环数组的另一种方法是使用 [for...in](https://www.tradingview.com/pine-script-reference/v5/#op_for{dot}{dot}{dot}in)循环。此方法是标准 for 循环的变体，可以迭代数组中的值引用和索引。下面是我们如何使用循环编写上面的代码示例的示例`for...in`：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`for...in` loop", overlay = true)
 //@variable An array of `close` prices from the 1-minute timeframe.
 array<float> a = request.security_lower_tf(syminfo.tickerid, "1", close)
@@ -266,9 +250,8 @@ label.new(bar_index, high, text = labelText)
 
 也可以使用[while](https://www.tradingview.com/pine-script-reference/v5/#op_while)循环语句：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`while` loop", overlay = true)
 array<float> a = request.security_lower_tf(syminfo.tickerid, "1", close)
 
@@ -287,9 +270,8 @@ label.new(bar_index, high, text = labelText)
 
 ![../_images/Arrays-Scope-Bands.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-Scope-Bands.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Bands", "", true)
 //@variable The distance ratio between plotted price levels.
 factorInput = 1 + (input.float(-2., "Step %") / 100)
@@ -318,9 +300,8 @@ Pine Script™ 的历史引用运算符[[ \]](https://www.tradingview.com/pine-s
 
 ![../_images/Arrays-History-referencing.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-History-referencing.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("History referencing")
 
 //@variable A single-value array declared on each bar.
@@ -354,9 +335,8 @@ plot(previousClose2, "previousClose2", color.white, 2)
 
 ![../_images/Arrays-InsertingAndRemovingArrayElements-Insert.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-InsertingAndRemovingArrayElements-Insert.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`array.insert()`")
 a = array.new<float>(5, 0)
 for i = 0 to 4
@@ -383,9 +363,8 @@ if barstate.islast
 
 [array.clear()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}clear) 从数组中删除所有元素。请注意，清除数组不会删除其元素引用的任何对象。请参阅下面的示例来说明其工作原理：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`array.clear()` example", overlay = true)
 
 // Create a label array and add a label to the array on each new bar.
@@ -414,9 +393,8 @@ if barstate.islast
 
 ![../_images/Arrays-InsertingAndRemovingArrayElements-LowsFromNewHighs.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-InsertingAndRemovingArrayElements-LowsFromNewHighs.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Lows from new highs", "", true)
 var lows = array.new<float>(0)
 flushLows = false
@@ -464,9 +442,8 @@ if flushLows
 
 ![../_images/Arrays-InsertingAndRemovingArrayElements-ShowLastnHighPivots.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-InsertingAndRemovingArrayElements-ShowLastnHighPivots.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 MAX_LABELS = 100
 indicator("Show Last n High Pivots", "", true, max_labels_count = MAX_LABELS)
 
@@ -507,9 +484,8 @@ if not na(pHi)
 
 ![../_images/Arrays-ManipulatedArrays-Concat.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-ManipulatingArrays-Concat.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`array.concat()`")
 a = array.new<float>(0)
 b = array.new<float>(0)
@@ -532,9 +508,8 @@ if barstate.islast
 
 ![../_images/Arrays-ManipulatedArrays-Copy.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-ManipulatingArrays-Copy.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`array.copy()`")
 a = array.new<float>(0)
 array.push(a, 0)
@@ -553,9 +528,8 @@ if barstate.islast
 
 使用[array.join()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}join)将数组中的所有元素连接成一个字符串，并使用指定的分隔符分隔这些元素：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 v1 = array.new<string>(10, "test")
 v2 = array.new<string>(10, "test")
@@ -576,9 +550,8 @@ l4 = label.new(bar_index, close, array.join(v4, ","))
 
 ![../_images/Arrays-ManipulatedArrays-Sort.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-ManipulatingArrays-Sort.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`array.sort()`")
 a = array.new<float>(0)
 b = array.new<float>(0)
@@ -604,9 +577,8 @@ if barstate.islast
 
 使用[array.reverse()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}reverse) 反转数组：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`array.reverse()`")
 a = array.new<float>(0)
 array.push(a, 0)
@@ -629,9 +601,8 @@ if barstate.islast
 
 ![../_images/Arrays-ManipulatedArrays-Slice.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Arrays-ManipulatingArrays-Slice.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`array.slice()`")
 a = array.new<float>(0)
 array.push(a, 0)
@@ -655,9 +626,8 @@ if barstate.islast
 
 [我们可以使用array.includes()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}includes)函数测试某个值是否是数组的一部分 ，如果找到该元素，该函数将返回 true。我们可以使用[array.indexof()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}indexof)函数查找数组中某个值的第一次出现 。第一次出现的是索引最低的那个。我们还可以使用[array.lastindexof()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}lastindexof)查找最后一次出现的值 ：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Searching in arrays")
 valueInput = input.int(1)
 a = array.new<float>(0)
@@ -692,9 +662,8 @@ if barstate.islast
 
 为了避免此错误，您必须在代码逻辑中做出规定，以防止使用位于数组索引边界之外的索引。此代码将生成错误，因为我们在循环中使用的最后一个索引超出了数组的有效索引范围：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Out of bounds index")
 a = array.new<float>(3)
 for i = 1 to 3
@@ -704,16 +673,14 @@ plot(array.pop(a))
 
 正确的`for`说法是：
 
-```
-Pine Script™
-Copiedfor i = 0 to 2
+```javascript
+for i = 0 to 2
 ```
 
 要循环未知大小数组中的所有数组元素，请使用：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Protected `for` loop")
 sizeInput = input.int(0, "Array size", minval = 0, maxval = 100000)
 a = array.new<float>(sizeInput)
@@ -724,9 +691,8 @@ plot(array.pop(a))
 
 *当您使用脚本的“设置/输入”*选项卡中的字段动态调整数组大小时，请使用[input.int()](https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int)`minval`和参数保护该值的边界 `maxval`：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Protected array size")
 sizeInput = input.int(10, "Array size", minval = 1, maxval = 100000)
 a = array.new<float>(sizeInput)
@@ -743,9 +709,8 @@ plot(array.size(a))
 
 当数组 ID 初始化为 时`na`，不允许对其进行操作，因为不存在数组。此时存在的只是一个包含该`na`值的数组变量，而不是指向现有数组的有效数组 ID。请注意，创建的数组中没有任何元素（就像使用 时所做的那样），但仍然具有有效的 ID。这段代码将抛出我们正在讨论的错误：`a = array.new_int(0)`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Out of bounds index")
 array<int> a = na
 array.push(a, 111)
@@ -754,16 +719,14 @@ label.new(bar_index, 0, "a: " + str.tostring(a))
 
 为了避免这种情况，请使用以下命令创建一个大小为零的数组：
 
-```
-Pine Script™
-Copiedarray<int> a = array.new_int(0)
+```javascript
+array<int> a = array.new_int(0)
 ```
 
 或者：
 
-```
-Pine Script™
-Copieda = array.new_int(0)
+```javascript
+a = array.new_int(0)
 ```
 
 
@@ -802,9 +765,8 @@ Copieda = array.new_int(0)
 
 每当父数组的大小被修改而导致由切片点创建的浅表副本位于父数组边界之外时，就会出现此消息。此代码将重现它，因为在创建从索引 3 到 4（我们的五元素父数组的最后两个元素）的切片后，我们删除父元素的第一个元素，使其大小为 4，最后一个索引为 3。从那一刻起，仍然指向父数组索引 3 到 4 处的“窗口”的浅拷贝，指向父数组的边界之外：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Slice out of bounds")
 a = array.new<float>(5, 0)
 b = array.slice(a, 3, 5)

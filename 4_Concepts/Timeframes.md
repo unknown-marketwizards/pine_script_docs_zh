@@ -44,9 +44,8 @@
 
 将时间范围字符串转换为以小数分钟为单位的表示形式提供了一种使用通用单位来比较它们的方法。此脚本使用[timeframe.in_seconds()](https://www.tradingview.com/pine-script-reference/v5/#fun_timeframe{dot}in_seconds) 函数将时间范围转换为浮点数秒，然后将结果转换为分钟：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Timeframe in minutes example", "", true)
 string tfInput = input.timeframe(defval = "", title = "Input TF")
 

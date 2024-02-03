@@ -16,30 +16,26 @@ Pine Script™ 方法是与内置或用户定义[类型](https://www.tradingview
 
 当使用这些特殊类型时，表达式：
 
-```
-Pine Script™
-Copied<namespace>.<functionName>([paramName =] <objectName>, …)
+```javascript
+<namespace>.<functionName>([paramName =] <objectName>, …)
 ```
 
 和：
 
-```
-Pine Script™
-Copied<objectName>.<functionName>(…)
+```javascript
+<objectName>.<functionName>(…)
 ```
 
 是等价的。例如，而不是使用：
 
-```
-Pine Script™
-Copiedarray.get(id, index)
+```javascript
+array.get(id, index)
 ```
 
 `id`要从指定的数组中获取值`index`，我们可以简单地使用：
 
-```
-Pine Script™
-Copiedid.get(index)
+```javascript
+id.get(index)
 ```
 
 以达到同样的效果。这种表示法消除了用户引用函数的名称空间的需要，因为 [get()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get)`id`是此上下文中的一种方法。
@@ -50,9 +46,8 @@ Copiedid.get(index)
 
 ![../_images/Methods_custom_bb.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Methods_custom_bb.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Custom Sample BB", overlay = true)
 
 float sourceInput  = input.source(close, "Source")
@@ -84,9 +79,8 @@ plot(lowBand, "Lower", color.red)
 
 让我们重写这段代码以使用方法而不是内置函数。在此版本中，我们已将 脚本中的所有内置[array.*函数替换为等效方法：](https://www.tradingview.com/pine-script-reference/v5/#op_array)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Custom Sample BB", overlay = true)
 
 float sourceInput  = input.source(close, "Source")
@@ -129,17 +123,15 @@ Pine Script™ 允许用户定义与任何内置或用户定义类型的对象�
 - method关键字必须包含在函数名称之前[。](https://www.tradingview.com/pine-script-reference/v5/#op_method)
 - 签名中第一个参数的类型必须显式声明，因为它表示该方法将与之关联的对象的类型。
 
-```
-Pine Script™
-Copied[export] method <functionName>(<paramType> <paramName> [= <defaultValue>], …) =>
+```javascript
+[export] method <functionName>(<paramType> <paramName> [= <defaultValue>], …) =>
     <functionBlock>
 ```
 
 让我们将用户定义的方法应用到之前的布林线示例中，以封装全局范围内的操作，这将简化代码并提高可重用性。请参阅示例中的这一部分：
 
-```
-Pine Script™
-Copied// Identify if `n` bars have passed.
+```javascript
+// Identify if `n` bars have passed.
 if bar_index % n == 0
     // Update the queue.
     sourceArray.push(sourceInput)
@@ -157,9 +149,8 @@ float lowBand  = sampleMean - sampleDev
 
 当为 true 时，此`maintainQueue()`方法调用[push()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}push)和 [shift()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}shift)方法并返回对象：`srcArray``takeSample`
 
-```
-Pine Script™
-Copied// @function         Maintains a queue of the size of `srcArray`.
+```javascript
+// @function         Maintains a queue of the size of `srcArray`.
 //                   It appends a `value` to the array and removes its oldest element at position zero.
 // @param srcArray   (array<float>) The array where the queue is maintained.
 // @param value      (float) The new value to be added to the queue.
@@ -179,9 +170,8 @@ method maintainQueue(array<float> srcArray, float value, bool takeSample = true)
 
 现在我们可以在示例中替换`sourceArray.push()`and ：`sourceArray.shift()``sourceArray.maintainQueue()`
 
-```
-Pine Script™
-Copied// Identify if `n` bars have passed.
+```javascript
+// Identify if `n` bars have passed.
 if bar_index % n == 0
     // Update the queue.
     sourceArray.maintainQueue(sourceInput)
@@ -198,9 +188,8 @@ float lowBand   = sampleMean - sampleDev
 
 当为true时，此`calcBB()`方法调用[avg()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}avg)和 [stdev()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}stdev)方法来`srcArray`更新`mean`和`dev`值。`calculate`该方法使用这些值返回一个分别包含基础值、上限值和下限值的元组：
 
-```
-Pine Script™
-Copied// @function         Computes Bollinger Band values from an array of data.
+```javascript
+// @function         Computes Bollinger Band values from an array of data.
 // @param srcArray   (array<float>) The array where the queue is maintained.
 // @param multiplier (float) Standard deviaiton multiplier.
 // @param calcuate   (bool) The method will only calculate new values when this is true.
@@ -217,9 +206,8 @@ method calcBB(array<float> srcArray, float mult, bool calculate = true) =>
 
 通过这种方法，我们现在可以从全局范围中删除布林带计算并提高代码可读性：
 
-```
-Pine Script™
-Copied// Identify if `n` bars have passed.
+```javascript
+// Identify if `n` bars have passed.
 bool newSample = bar_index % n == 0
 
 // Update the queue and compute new BB values on each new sample.
@@ -232,9 +220,8 @@ bool newSample = bar_index % n == 0
 
 现在我们已经应用了用户定义的方法，完整的脚本示例如下所示：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Custom Sample BB", overlay = true)
 
 float sourceInput  = input.source(close, "Source")
@@ -292,9 +279,8 @@ plot(lowBand, "Lower", color.red)
 
 下面，我们定义了一个`getType()`方法，该方法返回变量类型的字符串表示形式，并具有五种基本类型的重载：
 
-```
-Pine Script™
-Copied// @function   Identifies an object's type.
+```javascript
+// @function   Identifies an object's type.
 // @param this Object to inspect.
 // @returns    (string) A string representation of the type.
 method getType(int this) =>
@@ -317,9 +303,8 @@ method getType(string this) =>
 
 ![../_images/Methods_overloads_type_inspection.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Methods_overloads_type_inspection.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Type Inspection")
 
 // @function   Identifies an object's type.
@@ -371,9 +356,8 @@ lbl.set_text(results)
 
 下面写的是实例的内置[fill()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}fill) 方法的重载`array<float>`。此重载将 a 中的元素替换为和之间`srcArray`的范围内的 元素，并用 替换该范围之外的所有元素：`lowerBound``upperBound``innerValue``outerValue`
 
-```
-Pine Script™
-Copied// @function          Replaces elements in a `srcArray` between `lowerBound` and `upperBound` with an `innerValue`,
+```javascript
+// @function          Replaces elements in a `srcArray` between `lowerBound` and `upperBound` with an `innerValue`,
 //                    and replaces elements outside the range with an `outerValue`.
 // @param srcArray    (array<float>) Array to modify.
 // @param innerValue  (float) Value to replace elements within the range with.
@@ -392,16 +376,14 @@ method fill(array<float> srcArray, float innerValue, float outerValue, float low
 
 使用此方法，我们可以按值范围过滤数组以生成出现次数的数组。例如，表达式：
 
-```
-Pine Script™
-CopiedsrcArray.copy().fill(1.0, 0.0, min, val)
+```javascript
+srcArray.copy().fill(1.0, 0.0, min, val)
 ```
 
 复制`srcArray`对象，将1.0`min`和1.0 之间的所有元素替换`val`为 1.0，然后将上面的所有元素替换`val`为 0.0。从这里，很容易估计 处累积分布函数的输出`val`，因为它只是结果数组的平均值：
 
-```
-Pine Script™
-CopiedsrcArray.copy().fill(1.0, 0.0, min, val).avg()
+```javascript
+srcArray.copy().fill(1.0, 0.0, min, val).avg()
 ```
 
 - 注意：
@@ -410,9 +392,8 @@ CopiedsrcArray.copy().fill(1.0, 0.0, min, val).avg()
 
 我们现在可以用它来定义一种方法来计算我们的经验分布值。以下方法从 a 的累积分布函数`eCDF()`估计多个均匀分布的升序，并将结果推入 a ：`steps``srcArray``cdfArray`
 
-```
-Pine Script™
-Copied// @function       Estimates the empirical CDF of a `srcArray`.
+```javascript
+// @function       Estimates the empirical CDF of a `srcArray`.
 // @param srcArray (array<float>) Array to calculate on.
 // @param steps    (int) Number of steps in the estimation.
 // @returns        (array<float>) Array of estimated CDF ratios.
@@ -432,9 +413,8 @@ method eCDF(array<float> srcArray, int steps) =>
 
 此`featureScale()`方法使用数组[min()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}min) 和[range()](https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}range)方法来生成`srcArray`.在调用该方法之前，我们将使用它来标准化我们的数组`eCDF()`：
 
-```
-Pine Script™
-Copied// @function        Rescales the elements within a `srcArray` to the interval [0, 1].
+```javascript
+// @function        Rescales the elements within a `srcArray` to the interval [0, 1].
 // @param srcArray  (array<float>) Array to normalize.
 // @returns         (array<float>) Normalized copy of the `srcArray`.
 method featureScale(array<float> srcArray) =>
@@ -455,9 +435,8 @@ method featureScale(array<float> srcArray) =>
 
 ![../_images/Methods_empirical_distribution.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Methods_empirical_distribution.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Empirical Distribution", overlay = true)
 
 float sourceInput = input.source(close, "Source")

@@ -52,9 +52,8 @@ Alert [()](https://www.tradingview.com/pine-script-reference/v5/#fun_alert) 函�
 
 Alert [()](https://www.tradingview.com/pine-script-reference/v5/#fun_alert)函数具有以下签名：
 
-```
-Pine Script™
-Copiedalert(message, freq)
+```javascript
+alert(message, freq)
 ```
 
 - `message`
@@ -73,9 +72,8 @@ Alert [()](https://www.tradingview.com/pine-script-reference/v5/#fun_alert)函�
 
 让我们看一个检测 RSI 中心线交叉的示例：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("All `alert()` calls")
 r = ta.rsi(close, 20)
 
@@ -108,9 +106,8 @@ plot(r)
 
 最后，因为[alert()](https://www.tradingview.com/pine-script-reference/v5/#fun_alert)消息可以在运行时动态构造，所以我们可以使用以下代码来生成警报事件：
 
-```
-Pine Script™
-Copied// Trigger an alert on crosses.
+```javascript
+// Trigger an alert on crosses.
 if xUp or xDn
     firstPart = (xUp ? "Go long" : "Go short") + " (RSI is "
     alert(firstPart + str.tostring(r, "#.00)"))
@@ -122,9 +119,8 @@ if xUp or xDn
 
 假设，对于我们的下一个示例，我们希望提供仅针对多头、仅空头或两者触发警报的选项。您可以像这样编写脚本：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Selective `alert()` calls")
 detectLongsInput  = input.bool(true,  "Detect Longs")
 detectShortsInput = input.bool(true,  "Detect Shorts")
@@ -165,9 +161,8 @@ plot(r)
 
 当 RSI 连续三个柱线走势不利于交易时，此策略会创建*alert()函数调用：*
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Strategy with selective `alert()` calls")
 r = ta.rsi(close, 20)
 
@@ -208,9 +203,8 @@ Pine Script™ 程序员可以自定义执行特定命令时发送的警报消�
 
 `alert_message`让我们看一下在 [策略.entry()](https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry)调用中使用参数的策略：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Strategy using `alert_message`")
 r = ta.rsi(close, 20)
 
@@ -248,9 +242,8 @@ Alertcondition [()](https://www.tradingview.com/pine-script-reference/v5/#fun_al
 
 Alertcondition [()](https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition)函数具有以下签名：
 
-```
-Pine Script™
-Copiedalertcondition(condition, title, message)
+```javascript
+alertcondition(condition, title, message)
 ```
 
 - `condition`
@@ -271,9 +264,8 @@ Alertcondition [()](https://www.tradingview.com/pine-script-reference/v5/#fun_al
 
 *以下是创建alertcondition()事件*的代码示例：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`alertcondition()` on single condition")
 r = ta.rsi(close, 20)
 
@@ -293,9 +285,8 @@ alertcondition(xDn, "Short Alert", "Go short ")
 
 如果我们想在交叉发生时包含 RSI 的值，我们不能像在[alert()](https://www.tradingview.com/pine-script-reference/v5/#fun_alert)调用或策略中的参数中那样简单地`message`使用 将其值添加到字符串中。但是，我们可以使用占位符将其包含在内。这显示了两种选择：`str.tostring(r)``alert_message`
 
-```
-Pine Script™
-Copiedalertcondition(xUp, "Long Alert",  "Go long. RSI is {{plot_0}}")
+```javascript
+alertcondition(xUp, "Long Alert",  "Go long. RSI is {{plot_0}}")
 alertcondition(xDn, "Short Alert", 'Go short. RSI is {{plot("RSI")}}')
 ```
 
@@ -311,9 +302,8 @@ alertcondition(xDn, "Short Alert", 'Go short. RSI is {{plot("RSI")}}')
 
 该脚本演示了一种方法：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`alertcondition()` on multiple conditions")
 detectLongsInput  = input.bool(true, "Detect Longs")
 detectShortsInput = input.bool(true, "Detect Shorts")
@@ -358,18 +348,16 @@ alertcondition(enterLong or enterShort, "Compound alert", "Entry")
 
   相应地块编号的值。绘图按照脚本中出现的顺序从 0 到 19 编号，因此只能使用前 20 个绘图中的一个。例如，内置的“成交量”指标有两个输出系列：成交量和成交量 MA，因此您可以使用以下内容：
 
-```
-Pine Script™
-Copiedalertcondition(volume > ta.sma(volume,20), "Volume alert", "Volume ({{plot_0}}) > average ({{plot_1}})")
+```javascript
+alertcondition(volume > ta.sma(volume,20), "Volume alert", "Volume ({{plot_0}}) > average ({{plot_1}})")
 ```
 
 - `{{plot("[plot_title]")}}`
 
   当需要使用[plot()](https://www.tradingview.com/pine-script-reference/v5/#fun_plot)`title`调用中使用的参数 来引用绘图时，可以使用此占位符。请注意，占位符内**必须**使用双引号 ( )来包裹参数。这需要使用单引号 ( ) 来包裹字符串：`"``title``'``message`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 r = ta.rsi(close, 14)
 xUp = ta.crossover(r, 50)

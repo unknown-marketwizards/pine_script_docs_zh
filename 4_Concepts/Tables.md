@@ -39,9 +39,8 @@
 
 让我们创建第一个表，它将 ATR 的值放在图表的右上角。我们首先创建一个单单元格表格，然后填充该单元格：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("ATR", "", true)
 // We use `var` to only initialize the table on the first bar.
 var table atrDisplay = table.new(position.top_right, 1, 1)
@@ -63,9 +62,8 @@ if barstate.islast
 
 让我们提高脚本的可用性和美观性：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("ATR", "", true)
 atrPeriodInput = input.int(14,  "ATR period", minval = 1, tooltip = "Using a period of 1 yields True Range.")
 
@@ -88,9 +86,8 @@ if barstate.islast
 
 此示例使用单单元格表格为 RSI 牛市/熊市状态的图表背景着色：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Chart background", "", true)
 bullColorInput = input.color(color.new(color.green, 95), "Bull", inline = "1")
 bearColorInput = input.color(color.new(color.red, 95), "Bear", inline = "1")
@@ -119,9 +116,8 @@ colorChartBg(bullColorInput, bearColorInput)
 
 ![../_images/Tables-DisplayPanel-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Tables-DisplayPanel-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Price vs MA", "", true)
 
 var string GP1 = "Moving averages"
@@ -170,9 +166,8 @@ for i = 1 to masQtyInput
 
 ![../_images/Tables-Heatmap-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Tables-Heatmap-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Price vs Past", "", true)
 
 var int MAX_LOOKBACK = 300

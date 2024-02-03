@@ -4,9 +4,8 @@ bgcolor [()](https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor) 
 
 该函数的签名是：
 
-```
-Pine Script™
-Copiedbgcolor(color, offset, editable, show_last, title) → void
+```javascript
+bgcolor(color, offset, editable, show_last, title) → void
 ```
 
 它的`color`参数允许使用“系列颜色”作为其参数，因此可以在表达式中动态计算它。
@@ -15,9 +14,8 @@ Copiedbgcolor(color, offset, editable, show_last, title) → void
 
 下面是一个为交易时段的背景着色的脚本（例如，在 30 分钟 EURUSD 上尝试）：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Session backgrounds", overlay = true)
 
 // Default color constants using tranparency of 25.
@@ -65,9 +63,8 @@ bgcolor(sessionColor)
 
 在下一个示例中，我们为 CCI 线的背景生成渐变：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("CCI Background")
 
 bullColor = input.color(color.lime, "🠅", inline = "1")

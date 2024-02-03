@@ -51,9 +51,8 @@ Pine Script™ 将类型限定符的主导地位建立在以下层次结构上�
 
 [下面是一个在indicator()](https://www.tradingview.com/pine-script-reference/v5/#fun_indicator) 和[plot()](https://www.tradingview.com/pine-script-reference/v5/#fun_plot)函数中使用“const”值的示例，这两个函数都需要“const string”限定类型的值作为它们的`title`参数：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 
 // The following global variables are all of the "const string" qualified type:
 
@@ -75,9 +74,8 @@ plot(hl2, PLOT3_TITLE)
 
 以下示例将引发编译错误，因为它使用 [syminfo.ticker](https://www.tradingview.com/pine-script-reference/v5/#var_syminfo.ticker)，它返回一个“简单”值，因为它依赖于只有在脚本开始执行后才能访问的图表信息：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 
 //@variable The title in the `indicator()` call.
 var NAME = "My indicator for " + syminfo.ticker
@@ -98,9 +96,8 @@ input.source [()](https://www.tradingview.com/pine-script-reference/v5/#fun_inpu
 
 以下脚本绘制了和上下文`sourceInput`中a 的值。 request.security [()](https://www.tradingview.com/pine-script-reference/v5/#fun_request.security)调用在此脚本中有效，因为它的和参数允许“简单字符串”参数，这意味着它们也可以接受“输入字符串”值，因为“输入”限定符在层次结构中*较低：*`symbolInput``timeframeInput``symbol``timeframe`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("input demo", overlay = true)
 
 //@variable The symbol to request data from. Qualified as "input string".
@@ -128,9 +125,8 @@ plot(requestedSource)
 
 此脚本突出显示背景以警告用户他们正在使用非标准图表类型。它使用[chart.is_standard](https://www.tradingview.com/pine-script-reference/v5/#var_chart.is_standard)的值 来计算 `isNonStandard`变量，然后使用该变量的值来计算`warningColor`也引用“简单”值的a。[bgcolor()](https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor)`color`的参数允许 “系列颜色”参数，这意味着它也可以接受“简单颜色”值，因为“简单”在层次结构中较低：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("simple demo", overlay = true)
 
 //@variable Is `true` when the current chart is non-standard. Qualified as "simple bool".
@@ -154,9 +150,8 @@ bgcolor(warningColor, title = "Non-standard chart color")
 
 此脚本显示 上方柱线的[最高](https://www.tradingview.com/pine-script-reference/v5/#fun_ta.highest) 和[最低](https://www.tradingview.com/pine-script-reference/v5/#fun_ta.lowest)值。分配给和变量的值是“series float”限定类型，因为它们可以在脚本执行过程中发生变化：`sourceInput``lengthInput``highest``lowest`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("series demo", overlay = true)
 
 //@variable The source value to calculate on. Qualified as "series float".
@@ -190,9 +185,8 @@ Pine Script™ 可以自动将某些类型的值转换为其他类型。自动�
 
 在大多数情况下，Pine Script™ 可以自动确定值的类型。但是，我们还可以使用 type 关键字显式 *指定*类型，以提高可读性和需要显式定义的代码（例如，声明分配给 [na 的](https://www.tradingview.com/pine-script-reference/v5/#var_na)变量）。例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Types demo", overlay = true)
 
 //@variable A value of the "const string" type for the `ma` plot's title.
@@ -228,9 +222,8 @@ plotchar(crossUp, "Cross Up", "▲", location.belowbar, size = size.small)
 
 *整数文字是以十进制*表示法编写的数值。例如：
 
-```
-Pine Script™
-Copied1
+```javascript
+1
 -1
 750
 ```
@@ -245,9 +238,8 @@ Copied1
 
 浮点文字是用`.`分隔符编写的数值。它们还可能包含符号`e`or `E`（这意味着“10 的 X 次方”，其中 X 是 `e`or`E`符号后面的数字）。例如：
 
-```
-Pine Script™
-Copied3.14159    // Rounded value of Pi (π)
+```javascript
+3.14159    // Rounded value of Pi (π)
 - 3.0
 6.02e23    // 6.02 * 10^23 (a very large value)
 1.6e-19    // 1.6 * 10^-19 (a very small value)
@@ -265,9 +257,8 @@ Pine Script™ 中“浮点”值的内部精度为 1e-16。
 
 只有两个文字表示布尔值：
 
-```
-Pine Script™
-Copiedtrue    // true value
+```javascript
+true    // true value
 false   // false value
 ```
 
@@ -287,9 +278,8 @@ false   // false value
 
 这些是“颜色”文字的示例：
 
-```
-Pine Script™
-Copied#000000      // black color
+```javascript
+#000000      // black color
 #FF0000      // red color
 #00FF00      // green color
 #0000FF      // blue color
@@ -307,9 +297,8 @@ Pine Script™ 还具有[内置颜色常量](https://www.tradingview.com/pine-sc
 
 请注意，在`color.*()`函数中指定红色、绿色或蓝色分量时，我们使用“int”或“float”参数，其值介于 0 到 255 之间。指定透明度时，我们使用介于 0 到 100 之间的值，其中 0 表示完全不透明，100 表示完全不透明。意思是完全透明。例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Shading the chart's background", overlay = true)
 
 //@variable A "const color" value representing the base for each day's color.
@@ -332,47 +321,41 @@ bgcolor(color.new(BASE_COLOR, transparency))
 
 Pine 中的字符串文字是用单引号或双引号括起来的字符。例如：
 
-```
-Pine Script™
-Copied"This is a string literal using double quotes."
+```javascript
+"This is a string literal using double quotes."
 'This is a string literal using single quotes.'
 ```
 
 单引号和双引号在 Pine Script™ 中的功能是等效的。双引号内的“字符串”可以包含任意数量的单引号，反之亦然：
 
-```
-Pine Script™
-Copied"It's an example"
+```javascript
+"It's an example"
 'The "Star" indicator'
 ```
 
 脚本可以使用反斜杠字符 ( ) 对“字符串”中的封闭分隔符*进行转义*`\`。例如：
 
-```
-Pine Script™
-Copied'It\'s an example'
+```javascript
+'It\'s an example'
 "The \"Star\" indicator"
 ```
 
 我们可以创建包含新行转义字符 () 的“字符串”值，用于使用[绘图类型](https://www.tradingview.com/pine-script-docs/en/v5/language/Type_system.html#pagetypesystem-types-drawingtypes)的函数和对象显示`\n`多行文本。例如：`plot*()``log.*()`
 
-```
-Pine Script™
-Copied"This\nString\nHas\nOne\nWord\nPer\nLine"
+```javascript
+"This\nString\nHas\nOne\nWord\nPer\nLine"
 ```
 
 我们可以使用[+](https://www.tradingview.com/pine-script-reference/v5/#op_+)运算符来连接“字符串”值：
 
-```
-Pine Script™
-Copied"This is a " + "concatenated string."
+```javascript
+"This is a " + "concatenated string."
 ```
 
 命名空间中的内置函数`str.*()`使用专门的操作创建“字符串”值。例如，此脚本创建一个*格式化字符串*来表示“浮动”价格值，并使用标签显示结果：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Formatted string demo", overlay = true)
 
 //@variable A "series string" value representing the bar's OHLC data.
@@ -394,9 +377,8 @@ Pine Script™ 的[plot()](https://www.tradingview.com/pine-script-reference/v5/
 
 例如，此脚本在图表上绘制两个 EMA，并使用 [fill()](https://www.tradingview.com/pine-script-reference/v5/#fun_fill)函数填充它们之间的空间：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("plot fill demo", overlay = true)
 
 //@variable A "series float" value representing a 10-bar EMA of `close`.
@@ -445,9 +427,8 @@ Pine Script™ 绘图类型允许脚本在图表上创建自定义绘图。它�
 
 此示例在每个图表条形上绘制连接前一个条形的[最高点](https://www.tradingview.com/pine-script-reference/v5/#var_high) 和当前条形的[最低点](https://www.tradingview.com/pine-script-reference/v5/#var_low)的线。它还在每条线的两个点处显示标签。线条和标签从`firstPoint`和`secondPoint`变量获取信息，这些变量引用使用 [Chart.point_from_index()](https://www.tradingview.com/pine-script-reference/v5/#fun_chart.point.from_index)和 [Chart.point.now()](https://www.tradingview.com/pine-script-reference/v5/#fun_chart.point.now)创建的图表点：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Chart points demo", overlay = true)
 
 //@variable A new `chart.point` at the previous `bar_index` and `high`.
@@ -486,9 +467,8 @@ Pine Script™ 中的集合（[数组](https://www.tradingview.com/pine-script-d
 
 例如，可以通过以下任一等效方式声明单个元素值为 10 的“int”数组：
 
-```
-Pine Script™
-Copieda1 = array.new<int>(1, 10)
+```javascript
+a1 = array.new<int>(1, 10)
 array<int> a2 = array.new<int>(1, 10)
 a3 = array.from(10)
 array<int> a4 = array.from(10)
@@ -504,9 +484,8 @@ array<int> a4 = array.from(10)
 
 type 关键字允许创建*用户定义类型(UDT)* [，](https://www.tradingview.com/pine-script-reference/v5/#op_type)脚本可以从中创建[对象](https://www.tradingview.com/pine-script-docs/en/v5/language/Objects.html#pageobjects)。 UDT 是复合类型；它们包含任意数量的可以是任何类型的*字段*，包括其他用户定义的类型。定义用户定义类型的语法是：
 
-```
-Pine Script™
-Copied[export] type <UDT_identifier>
+```javascript
+[export] type <UDT_identifier>
     <field_type> <field_name> [= <value>]
     ...
 ```
@@ -521,9 +500,8 @@ Copied[export] type <UDT_identifier>
 
 此示例声明一个`pivotPoint`带有“int”`pivotTime`字段和“float”`priceLevel`字段的 UDT，分别保存有关计算的枢轴的时间和价格信息：
 
-```
-Pine Script™
-Copied//@type             A user-defined type containing pivot information.
+```javascript
+//@type             A user-defined type containing pivot information.
 //@field pivotTime  Contains time information about the pivot.
 //@field priceLevel Contains price information about the pivot.
 type pivotPoint
@@ -533,9 +511,8 @@ type pivotPoint
 
 用户定义类型支持*类型递归*，即一个UDT的字段可以引用同一个UDT的对象。在这里，我们`nextPivot`在之前的`pivotPoint`类型中添加了一个引用另一个`pivotPoint`实例的字段：
 
-```
-Pine Script™
-Copied//@type             A user-defined type containing pivot information.
+```javascript
+//@type             A user-defined type containing pivot information.
 //@field pivotTime  Contains time information about the pivot.
 //@field priceLevel Contains price information about the pivot.
 //@field nextPivot  A `pivotPoint` instance containing additional pivot information.
@@ -563,9 +540,8 @@ Pine Script™ 中有一个特殊值，称为[na ，它是](https://www.tradingv
 
 脚本可以自动将[na](https://www.tradingview.com/pine-script-reference/v5/#var_na)值转换为几乎任何类型。但是，在某些情况下，编译器无法推断与[na](https://www.tradingview.com/pine-script-reference/v5/#var_na)值关联的类型， 因为可能适用多个类型转换规则。例如：
 
-```
-Pine Script™
-Copied// Compilation error!
+```javascript
+// Compilation error!
 myVar = na
 ```
 
@@ -573,31 +549,27 @@ myVar = na
 
 要解决此类错误，我们必须显式声明与变量关联的类型。假设该`myVar`变量将在后续脚本迭代中引用“浮点”值。我们可以通过使用[float](https://www.tradingview.com/pine-script-reference/v5/#type_float)关键字声明变量来解决该错误 ：
 
-```
-Pine Script™
-Copiedfloat myVar = na
+```javascript
+float myVar = na
 ```
 
 或者通过[float()函数将](https://www.tradingview.com/pine-script-reference/v5/#fun_float)[na](https://www.tradingview.com/pine-script-reference/v5/#var_na)值显式转换为“float”类型：
 
-```
-Pine Script™
-CopiedmyVar = float(na)
+```javascript
+myVar = float(na)
 ```
 
 为了测试变量或表达式的值是否为[na](https://www.tradingview.com/pine-script-reference/v5/#var_na)，我们调用[na()](https://www.tradingview.com/pine-script-reference/v5/#fun_na)函数，`true`如果该值未定义，该函数将返回。例如：
 
-```
-Pine Script™
-Copied//@variable Is 0 if the `myVar` is `na`, `close` otherwise.
+```javascript
+//@variable Is 0 if the `myVar` is `na`, `close` otherwise.
 float myClose = na(myVar) ? 0 : close
 ```
 
 不要使用`==`比较运算符来测试[na](https://www.tradingview.com/pine-script-reference/v5/#var_na) 值，因为脚本无法确定未定义值的相等性：
 
-```
-Pine Script™
-Copied//@variable Returns the `close` value. The script cannot compare the equality of `na` values, as they're undefined.
+```javascript
+//@variable Returns the `close` value. The script cannot compare the equality of `na` values, as they're undefined.
 float myClose = myVar == na ? 0 : close
 ```
 
@@ -605,9 +577,8 @@ float myClose = myVar == na ? 0 : close
 
 例如，这行代码检查当前柱的[收盘](https://www.tradingview.com/pine-script-reference/v5/#var_close)价是否大于前一个柱的值：
 
-```
-Pine Script™
-Copied//@variable Is `true` when the `close` exceeds the last bar's `close`, `false` otherwise.
+```javascript
+//@variable Is `true` when the `close` exceeds the last bar's `close`, `false` otherwise.
 bool risingClose = close > close[1]
 ```
 
@@ -615,17 +586,15 @@ bool risingClose = close > close[1]
 
 通过将未定义的过去值替换为当前柱中的值，我们可以确保表达式还在第一个柱上返回可操作的值。当值为 [na](https://www.tradingview.com/pine-script-reference/v5/#var_na)时，这行代码使用[nz()函数将过去柱的收盘](https://www.tradingview.com/pine-script-reference/v5/#fun_nz)[价](https://www.tradingview.com/pine-script-reference/v5/#var_close) 替换 为当前柱的[开盘价](https://www.tradingview.com/pine-script-reference/v5/#var_open)：
 
-```
-Pine Script™
-Copied//@variable Is `true` when the `close` exceeds the last bar's `close` (or the current `open` if the value is `na`).
+```javascript
+//@variable Is `true` when the `close` exceeds the last bar's `close` (or the current `open` if the value is `na`).
 bool risingClose = close > nz(close[1], open)
 ```
 
 保护脚本免受[na](https://www.tradingview.com/pine-script-reference/v5/#var_na)实例的影响有助于防止未定义的值在计算结果中传播。例如，此脚本`allTimeHigh`在第一个柱上声明一个变量。然后，它使用和柱形[最高点](https://www.tradingview.com/pine-script-reference/v5/#var_high)之间的[math.max()](https://www.tradingview.com/pine-script-reference/v5/#fun_math.max)来更新 整个执行过程：`allTimeHigh``allTimeHigh`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("na protection demo", overlay = true)
 
 //@variable The result of calculating the all-time high price with an initial value of `na`.
@@ -640,9 +609,8 @@ plot(allTimeHigh) // Plots `na` on all bars.
 
 [该脚本在所有柱上绘制na](https://www.tradingview.com/pine-script-reference/v5/#var_na)值，因为我们没有在代码中包含任何[na](https://www.tradingview.com/pine-script-reference/v5/#var_na)保护。为了修复该行为并绘制预期结果（即图表价格的历史最高点），我们可以使用 [nz()](https://www.tradingview.com/pine-script-reference/v5/#fun_nz)替换该系列中的[na](https://www.tradingview.com/pine-script-reference/v5/#var_na) 值：`allTimeHigh`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("na protection demo", overlay = true)
 
 //@variable The result of calculating the all-time high price with an initial value of `na`.
@@ -677,9 +645,8 @@ plot(allTimeHigh)
 
 脚本在创建新的集合实例时使用类型模板来声明指向集合的变量。例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Type templates demo")
 
 //@variable A variable initially assigned to `na` that accepts arrays of "int" values.
@@ -702,9 +669,8 @@ Pine Script™ 包含自动类型转换机制，可在必要时将**“int”值
 
 下面的代码演示了 Pine 中已弃用的自动转换行为。它在每个柱上创建一个 `randomValue`具有“系列浮点”值的变量，并将其传递给[if](https://www.tradingview.com/pine-script-reference/v5/#kw_if)`condition`结构 中的参数和[plotchar()](https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar)函数调用中的参数 。由于这两个参数都接受“bool”值，因此脚本在评估它们时会自动将其转换为“bool”：`series``randomValue`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Auto-casting demo", overlay = true)
 
 //@variable A random rounded value between -1 and 1.
@@ -733,9 +699,8 @@ bgcolor(bgColor)
 
 下面的示例显示了尝试使用“const float”值作为 [ta.sma()](https://www.tradingview.com/pine-script-reference/v5/#fun_ta.sma)`length`函数调用中的参数的代码 。该脚本将无法编译，因为它无法自动将“float”值转换为所需的“int”类型：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Explicit casting demo", overlay = true)
 
 //@variable The length of the SMA calculation. Qualified as "const float".
@@ -750,9 +715,8 @@ plot(sma)
 
 编译器告诉我们代码在需要“int”的地方使用“float”值。没有自动转换规则可以将“float”转换为“int”，因此我们必须自己完成这项工作。在此版本的代码中，我们使用 [int()函数在](https://www.tradingview.com/pine-script-reference/v5/#fun_int)[ta.sma()](https://www.tradingview.com/pine-script-reference/v5/#fun_ta.sma)调用中将“float”值显式转换`LENGTH`为“int”类型：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("explicit casting demo")
 
 //@variable The length of the SMA calculation. Qualified as "const float".
@@ -767,9 +731,8 @@ plot(sma)
 
 例如，once 可以通过以下任一等效方式将值为 [na的变量显式声明为“标签”类型：](https://www.tradingview.com/pine-script-reference/v5/#var_na)
 
-```
-Pine Script™
-Copied// Explicitly specify that the variable references "label" objects:
+```javascript
+// Explicitly specify that the variable references "label" objects:
 label myLabel = na
 
 // Explicitly cast the `na` value to the "label" type:
@@ -784,9 +747,8 @@ myLabel = label(na)
 
 例如，以下[用户定义函数](https://www.tradingview.com/pine-script-docs/en/v5/language/User-defined_functions.html#pageuserdefinedfunctions)返回两个“浮点”值的和与积：
 
-```
-Pine Script™
-Copied//@function Calculates the sum and product of two values.
+```javascript
+//@function Calculates the sum and product of two values.
 calcSumAndProduct(float a, float b) =>
     //@variable The sum of `a` and `b`.
     float sum = a + b
@@ -798,9 +760,8 @@ calcSumAndProduct(float a, float b) =>
 
 当我们稍后在脚本中调用此函数时，我们使用*元组声明*来声明与函数调用返回的值相对应的多个变量：
 
-```
-Pine Script™
-Copied// Declare a tuple containing the sum and product of the `high` and `low`, respectively.
+```javascript
+// Declare a tuple containing the sum and product of the `high` and `low`, respectively.
 [hlSum, hlProduct] = calcSumAndProduct(high, low)
 ```
 
@@ -808,9 +769,8 @@ Copied// Declare a tuple containing the sum and product of the `high` and `low`,
 
 在上面的示例中，生成的元组包含相同类型（“float”）的值。但是，需要注意的是，元组可以包含*多种类型*的值。例如，`chartInfo()` 下面的函数返回一个包含“int”、“float”、“bool”、“color”和“string”值的元组：
 
-```
-Pine Script™
-Copied//@function Returns information about the current chart.
+```javascript
+//@function Returns information about the current chart.
 chartInfo() =>
     //@variable The first visible bar's UNIX time value.
     int firstVisibleTime = chart.left_visible_bar_time
@@ -830,9 +790,8 @@ chartInfo() =>
 
 例如，此函数返回一个包含 OHLC 值的元组，该值四舍五入到可被交易品种的[最小刻度](https://www.tradingview.com/pine-script-reference/v5/#var_syminfo.mintick)`roundedOHLC()`值整除的最接近价格 。我们将此函数称为[request.security()](https://www.tradingview.com/pine-script-reference/v5/#fun_request.security)中的参数 ，以请求包含每日 OHLC 值的元组：`expression`
 
-```
-Pine Script™
-Copied//@function Returns a tuple of OHLC values, rounded to the nearest tick.
+```javascript
+//@function Returns a tuple of OHLC values, rounded to the nearest tick.
 roundedOHLC() =>
     [math.round_to_mintick(open), math.round_to_mintick(high), math.round_to_mintick(low), math.round_to_mintick(close)]
 
@@ -841,9 +800,8 @@ roundedOHLC() =>
 
 我们还可以通过直接传递一个舍入值的元组来实现相同的结果，如[request.security()](https://www.tradingview.com/pine-script-reference/v5/#fun_request.security)`expression`调用中的 ：
 
-```
-Pine Script™
-Copied[op, hi, lo, cl] = request.security(
+```javascript
+[op, hi, lo, cl] = request.security(
      syminfo.tickerid, "D",
      [math.round_to_mintick(open), math.round_to_mintick(high), math.round_to_mintick(low), math.round_to_mintick(close)]
  )
@@ -851,9 +809,8 @@ Copied[op, hi, lo, cl] = request.security(
 
 [条件结构](https://www.tradingview.com/pine-script-docs/en/v5/language/Conditional_structures.html#pageconditionalstructures)的局部块（包括 [if](https://www.tradingview.com/pine-script-reference/v5/#kw_if)和 [switch](https://www.tradingview.com/pine-script-reference/v5/#kw_switch)语句）可以返回元组。例如：
 
-```
-Pine Script™
-Copied[v1, v2] = if close > open
+```javascript
+[v1, v2] = if close > open
     [high, close]
 else
     [close, low]
@@ -861,26 +818,23 @@ else
 
 和：
 
-```
-Pine Script™
-Copied[v1, v2] = switch
+```javascript
+[v1, v2] = switch
 close > open => [high, close]
 =>              [close, low]
 ```
 
 但是，三元不能包含元组，因为三元语句中的返回值不被视为本地块：
 
-```
-Pine Script™
-Copied// Not allowed.
+```javascript
+// Not allowed.
 [v1, v2] = close > open ? [high, close] : [close, low]
 ```
 
 请注意，从函数返回的元组中的所有项目都被限定为“简单”或“系列”，具体取决于其内容。如果元组包含“series”值，则元组中的所有其他元素也将采用“series”限定符。例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Qualified types in tuples demo")
 
 makeTicker(simple string prefix, simple string ticker) =>

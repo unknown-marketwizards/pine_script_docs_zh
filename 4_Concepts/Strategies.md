@@ -12,9 +12,8 @@ Pine Script™ 策略根据历史和实时数据模拟交易的执行，以促�
 
 以下脚本是一个简单的策略，模拟在两条移动平均线交叉时建立多头或空头头寸：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("test", overlay = true)
 
 // Calculate two moving averages with different lengths.
@@ -129,9 +128,8 @@ TradingView 利用*经纪商模拟器*来模拟交易策略的性能。与现实
 
 ![../_images/Strategies-Broker-emulator-Bar-magnifier-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Broker-emulator-Bar-magnifier-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Bar Magnifier Demo", overlay = true, use_bar_magnifier = false)
 
 //@variable The UNIX timestamp to place the order at.
@@ -184,9 +182,8 @@ bgcolor(orderColor)
 
 为了更仔细地了解订单如何运作以及它们如何成为交易，让我们编写一个简单的策略脚本：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("My strategy", overlay = true, margin_long = 100, margin_short = 100)
 
 //@function Displays text passed to `txt` when called.
@@ -227,9 +224,8 @@ Pine Script™ 策略允许用户根据其特定需求模拟不同的订单类�
 
 ![../_images/Strategies-Orders-and-entries-Order-types-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-types-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Market order demo", overlay = true, margin_long = 100, margin_short = 100)
 
 //@variable Number of bars between long and short entries.
@@ -266,9 +262,8 @@ else if shortCondition
 
 ![../_images/Strategies-Orders-and-entries-Order-types-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-types-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Limit order demo", overlay = true, margin_long = 100, margin_short = 100)
 
 //@function Displays text passed to `txt` and a horizontal line at `price` when called.
@@ -293,9 +288,8 @@ if last_bar_index - bar_index == 100
 
 ![../_images/Strategies-Orders-and-entries-Order-types-3.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-types-3.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Limit order demo", overlay = true, margin_long = 100, margin_short = 100)
 
 //@function Displays text passed to `txt` and a horizontal line at `price` when called.
@@ -326,9 +320,8 @@ if last_bar_index - bar_index == 100
 
 ![../_images/Strategies-Orders-and-entries-Order-types-4.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-types-4.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Stop order demo", overlay = true, margin_long = 100, margin_short = 100)
 
 //@function Displays text passed to `txt` when called and shows the `price` level on the chart.
@@ -356,9 +349,8 @@ if last_bar_index - bar_index == 100
 
 ![../_images/Strategies-Orders-and-entries-Order-types-5.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-types-5.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Stop-Limit order demo", overlay = true, margin_long = 100, margin_short = 100)
 
 //@function Displays text passed to `txt` when called and shows the `price` level on the chart.
@@ -408,9 +400,8 @@ Pine Script™ 策略具有多种模拟下单功能，称为*下单命令*。每
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Entry demo", "test", overlay = true)
 
 //@variable Is `true` on every 100th bar.
@@ -445,9 +436,8 @@ bgcolor(sellCondition ? color.new(color.red, 90) : na)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-3.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-3.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Order demo", "test", overlay = true)
 
 //@variable Is `true` on every 100th bar.
@@ -486,9 +476,8 @@ bgcolor(sellCond ? color.new(color.red, 90) : na)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-4.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-4.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Exit demo", "test", overlay = true)
 
 //@variable Is `true` on every 100th bar.
@@ -527,9 +516,8 @@ plot(takeProfit, "TP", color.green, style = plot.style_circles)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-4a.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-4a.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Exit all demo", "test", overlay = true, pyramiding = 2)
 
 //@variable Is `true` on every 100th bar.
@@ -564,9 +552,8 @@ plot(takeProfit, "TP", color.green, style = plot.style_circles)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-5.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-5.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Multiple exit demo", "test", overlay = true)
 
 //@variable Is `true` on every 100th bar.
@@ -619,9 +606,8 @@ plot(takeProfit2, "TP2", color.green, style = plot.style_circles)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-5a.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-5a.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Reserved exit demo", "test", overlay = true)
 
 //@variable "stop" exit order price.
@@ -651,9 +637,8 @@ plot(showPlot ? limit : na, "Limit 1", color.green, 2, plot.style_linebr)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-5b.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-5b.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Trailing stop order demo", overlay = true, margin_long = 100, margin_short = 100)
 
 //@variable Offset used to determine how far above the entry price (in ticks) the activation level will be located.
@@ -719,9 +704,8 @@ plot(trailingStop, "Trailing Stop")
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-6.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-6.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Close demo", "test", overlay = true)
 
 //@variable Is `true` on every 50th bar.
@@ -744,9 +728,8 @@ bgcolor(sellCond ? color.new(color.red, 90) : na)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-7.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-7.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Multiple close demo", "test", overlay = true, pyramiding = 3)
 
 //@variable Is `true` on every 100th bar.
@@ -769,9 +752,8 @@ bgcolor(sellCond ? color.new(color.red, 90) : na)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-8.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-8.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Close multiple ID demo", "test", overlay = true, pyramiding = 3)
 
 switch strategy.opentrades
@@ -791,9 +773,8 @@ switch strategy.opentrades
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-9.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-9.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Cancel demo", "test", overlay = true)
 
 //@variable Draws a horizontal line at the `limit` price of the "buy" order.
@@ -821,9 +802,8 @@ bgcolor(bgColor)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-10.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-10.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Multiple cancel demo", "test", overlay = true, pyramiding = 3)
 
 //@variable Draws a horizontal line at the `limit` price of the "buy" order.
@@ -855,9 +835,8 @@ bgcolor(bgColor)
 
 ![../_images/Strategies-Orders-and-entries-Order-placement-commands-11.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Orders-and-entries-Order-placement-commands-11.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Cancel market demo", "test", overlay = true)
 
 //@variable Returns `color.green` when the strategy places the "buy" order, `color.orange` when it tries to cancel.
@@ -887,9 +866,8 @@ Pine Script™ 策略有两种控制模拟交易规模的方法：
 
 ![../_images/Strategies-Position-sizing-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Position-sizing-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Buy low, sell high", overlay = true, default_qty_type = strategy.cash, default_qty_value = 5000)
 
 int   length      = input.int(20, "Length")
@@ -908,9 +886,8 @@ switch
 
 ![../_images/Strategies-Position-sizing-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Position-sizing-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Buy low, sell high", overlay = true, default_qty_type = strategy.cash, default_qty_value = 5000)
 
 int length = input.int(20, "Length")
@@ -933,9 +910,8 @@ switch
 
 ![../_images/Strategies-Closing-a-market-position-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Closing-a-market-position-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Exit Demo", pyramiding = 2)
 
 float positionSize = strategy.position_size
@@ -958,9 +934,8 @@ plot(positionSize == 0 ? na : positionSize, "Position Size", color.lime, 4, plot
 
 ![../_images/Strategies-Closing-a-market-position-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Closing-a-market-position-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Exit Demo", pyramiding = 2)
 
 float positionSize = strategy.position_size
@@ -994,9 +969,8 @@ strategy.oca.cancel OCA 类型在订单组中的订单执行或部分执行后 �
 
 ![../_images/Strategies-OCA-groups-Strategy-oca-cancel-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-OCA-groups-Strategy-oca-cancel-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("OCA Cancel Demo", overlay=true)
 
 float ma1 = ta.sma(close, 5)
@@ -1017,9 +991,8 @@ plot(ma2, "Slow MA", color.orange)
 
 ![../_images/Strategies-OCA-groups-Strategy-oca-cancel-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-OCA-groups-Strategy-oca-cancel-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("OCA Cancel Demo", overlay=true)
 
 float ma1 = ta.sma(close, 5)
@@ -1048,9 +1021,8 @@ Strategy.oca.reduce OCA 类型不会取消订单[。](https://www.tradingview.co
 
 ![../_images/Strategies-OCA-groups-Strategy-oca-reduce-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-OCA-groups-Strategy-oca-reduce-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Multiple TP Demo", overlay = true)
 
 var float stop   = na
@@ -1079,9 +1051,8 @@ plot(showPlot ? limit2 : na, "Limit 2", color.green, style = plot.style_linebr)
 
 ![../_images/Strategies-OCA-groups-Strategy-oca-reduce-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-OCA-groups-Strategy-oca-reduce-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Multiple TP Demo", overlay = true)
 
 var float stop   = na
@@ -1128,9 +1099,8 @@ Pine Script™ 策略可以使用与其计算工具不同的基础货币。用�
 
 ![../_images/Strategies-Currency-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Currency-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Currency Test", currency = currency.EUR)
 
 if last_bar_index - bar_index < 500
@@ -1208,9 +1178,8 @@ plot(lowest, "Lowest", color = color.red)
 
 ![../_images/Strategies-Altering-calculation-behavior-Calc-on-order-fills-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Altering-calculation-behavior-Calc-on-order-fills-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Intrabar exit", overlay = true, calc_on_order_fills = true)
 
 float stopSize   = input.float(5.0, "SL %", minval = 0.0) / 100.0
@@ -1235,9 +1204,8 @@ strategy.exit("Exit", stop = stopLoss, limit = takeProfit)
 
 ![../_images/Strategies-Altering-calculation-behavior-Calc-on-order-fills-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Altering-calculation-behavior-Calc-on-order-fills-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("buy on every fill", overlay = true, calc_on_order_fills = true, pyramiding = 100)
 
 if last_bar_index - bar_index <= 25
@@ -1272,9 +1240,8 @@ if last_bar_index - bar_index <= 25
 
 ![../_images/策略-模拟-交易-成本-Commission-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Simulating-trading-costs-Commission-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Commission Demo", overlay=true, default_qty_value = 2, default_qty_type = strategy.percent_of_equity)
 
 length = input.int(10, "Length")
@@ -1294,9 +1261,8 @@ plot(lowest, color = color.new(color.red, 50))
 
 ![../_images/策略-模拟-交易-成本-Commission-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Simulating-trading-costs-Commission-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy(
      "Commission Demo", overlay=true, default_qty_value = 2, default_qty_type = strategy.percent_of_equity,
      commission_type = strategy.commission.percent, commission_value = 1
@@ -1327,9 +1293,8 @@ plot(lowest, color = color.new(color.red, 50))
 
 ![../_images/Strategies-模拟交易成本-Slippage-and-unfilled-limits-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Simulating-trading-costs-Slippage-and-unfilled-limits-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy(
      "Slippage Demo", overlay = true, slippage = 20,
      default_qty_value = 2, default_qty_type = strategy.percent_of_equity
@@ -1390,9 +1355,8 @@ plotchar(fillPrice, "Fill price after slippage", "—", location.absolute, fille
 
 ![../_images/Strategies-模拟交易成本-Slippage-and-unfilled-limits-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Strategies-Simulating-trading-costs-Slippage-and-unfilled-limits-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy(
      "Verify price for limits example", overlay = true,
      default_qty_type = strategy.percent_of_equity, default_qty_value = 2
@@ -1492,9 +1456,8 @@ plot(lowest, "Lowest Low", color = color.new(color.red, 50))
 
 第一次入场发生在 2010 年 9 月 16 日柱的开盘价。该策略以 4.43 美元（入场价）买入 682,438 股（头寸规模）。然后，在2010年9月23日，当价格跌至3.9（当前价格）时，模拟器通过追加保证金强制平仓了111,052股。
 
-```
-Pine Script™
-CopiedMoney spent: 682438 * 4.43 = 3023200.34
+```javascript
+Money spent: 682438 * 4.43 = 3023200.34
 MVS: 682438 * 3.9 = 2661508.2
 Open Profit: −361692.14
 Equity: 1000000 + 0 − 361692.14 = 638307.86
@@ -1522,9 +1485,8 @@ Pine Script™ 策略不适用于 [alertcondition()调用，但它们支持通�
 
 以下脚本显示了默认订单填写警报消息的简单示例。在[strategy()](https://www.tradingview.com/pine-script-reference/v5/#fun_strategy)声明语句上方 ，它与消息文本中的交易操作、头寸规模、股票代码和填充价格值的*占位符*`@strategy_alert_message`一起使用：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 //@strategy_alert_message {{strategy.order.action}} {{strategy.position_size}} {{ticker}} @ {{strategy.order.price}}
 strategy("Alert Message Demo", overlay = true)
 float fastMa = ta.sma(close, 5)

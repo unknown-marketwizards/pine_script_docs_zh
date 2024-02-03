@@ -11,9 +11,8 @@
 
 fill [()](https://www.tradingview.com/pine-script-reference/v5/#fun_fill)函数有两个签名：
 
-```
-Pine Script™
-Copiedfill(plot1, plot2, color, title, editable, show_last, fillgaps) → void
+```javascript
+fill(plot1, plot2, color, title, editable, show_last, fillgaps) → void
 fill(hline1, hline2, color, title, editable, fillgaps) → void
 ```
 
@@ -23,9 +22,8 @@ fill(hline1, hline2, color, title, editable, fillgaps) → void
 
 ![../_images/Fills-Fill-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Fills-Fill-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Example 1")
 p1 = plot(math.sin(high))
 p2 = plot(math.cos(low))
@@ -44,9 +42,8 @@ fill(h3, h4, color.new(color.lime, 90))
 
 ![../_images/Fills-Fill-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Fills-Fill-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Example 2")
 src = close
 ma = ta.sma(src, 10)
@@ -61,9 +58,8 @@ fill(oscPlotID, zeroPlotID, color.new(color.blue, 90))
 
 ![../_images/Fills-Fill-3.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Fills-Fill-3.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Example 3", "", true)
 line1 = ta.sma(close, 5)
 line2 = ta.sma(close, 20)
@@ -76,9 +72,8 @@ fill(p1PlotID, p2PlotID, line1 > line2 ? color.new(color.green, 90) : color.new(
 
 线条填充是允许您填充通过[line.new()](https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new)函数创建的两个线条图之间的空间的对象。当调用[linefill.new()](https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new)函数时，图表上会显示一个 linefill 对象 。该函数具有以下签名：
 
-```
-Pine Script™
-Copiedlinefill.new(line1, line2, color) → series linefill
+```javascript
+linefill.new(line1, line2, color) → series linefill
 ```
 
 和参数是要在其间填充`line1`的`line2`两行的行 ID。参数`color`是填充的颜色。任何两行对之间只能有一个行填充，因此 在同一对行上连续调用[linefill.new()](https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new)会将前一个行填充替换为新的行填充。该函数返回它创建的对象的 ID `linefill`，该 ID 可以保存在变量中，以便在 [linefill.set_color()](https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}set_color)调用中使用，该调用将更改现有线条填充的颜色。
@@ -91,9 +86,8 @@ Copiedlinefill.new(line1, line2, color) → series linefill
 
 ![../_images/Fills-Linefill-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Fills-Linefill-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Channel", overlay = true)
 
 LEN_LEFT = 15

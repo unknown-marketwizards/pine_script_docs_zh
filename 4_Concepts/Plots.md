@@ -10,9 +10,8 @@ plot [()](https://www.tradingview.com/pine-script-reference/v5/#fun_plot) 函数
 
 ![../_images/Plots-Introduction-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Plots-Introduction-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`plot()`", "", true)
 plot(high, "Blue `high` line")
 plot(math.avg(close, open), "Crosses in body center", close > open ? color.lime : color.purple, 6, plot.style_cross)
@@ -39,9 +38,8 @@ plot(ma, "Two-color ALMA", almaColor, 2)
 
 ![../_images/Plots-Introduction-02.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Plots-Introduction-02.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Volume change", format = format.volume)
 
 color GREEN         = #008000
@@ -82,9 +80,8 @@ plot(0, "Zero line", color.gray)
 
 plot [()](https://www.tradingview.com/pine-script-reference/v5/#fun_plot)函数具有以下签名：
 
-```
-Pine Script™
-Copiedplot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
+```javascript
+plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
 ```
 
 [绘图（）](https://www.tradingview.com/pine-script-reference/v5/#fun_plot)的参数是：
@@ -137,9 +134,8 @@ Copiedplot(series, title, color, linewidth, style, trackprice, histbase, offset,
 
   默认为[display.all](https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}all)。当它设置为[display.none](https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}none)时，绘制的值不会影响脚本视觉空间的比例。该图将不可见，并且不会出现在指标值或数据窗口中。它在用作其他脚本的外部输入的绘图中很有用，或者`{{plot("[plot_title]")}}`在 [alertcondition()](https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition)调用中与占位符一起使用的绘图中很有用，例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 r = ta.rsi(close, 14)
 xUp = ta.crossover(r, 50)
@@ -159,9 +155,8 @@ alertcondition(xUp, "xUp alert", message = 'RSI is bullish at: {{plot("RSI")}}')
 
 ![../_images/Plots-PlottingConditionally-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Plots-PlottingConditionally-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Discontinuous plots", "", true)
 bool plotValues = bar_index % 3 == 0
 plot(plotValues ? high : na, color = color.fuchsia, linewidth = 6, style = plot.style_linebr)
@@ -182,9 +177,8 @@ plot(plotValues ? low : na, color = plotValues ? color.green : na, linewidth = 6
 
 此脚本展示了如何将绘图限制为用户定义日期之后的条形图。我们使用[input.time()](https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time)函数创建一个输入小部件，允许脚本用户选择日期和时间，并使用 2021 年 1 月 1 日作为其默认值：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 startInput = input.time(timestamp("2021-01-01"))
 plot(time > startInput ? close : na)
@@ -196,18 +190,16 @@ plot(time > startInput ? close : na)
 
 [plot()](https://www.tradingview.com/pine-script-reference/v5/#fun_plot)`color`中参数的值可以是常量，例如内置[常量颜色](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Colors.html#pagecolors-constantcolors)之一或[颜色文字](https://www.tradingview.com/pine-script-docs/en/v5/language/Type_system.html#pagetypesystem-types-color)。在 Pine Script™ 中，此类颜色的限定类型称为**“常量颜色”**（请参阅[类型系统](https://www.tradingview.com/pine-script-docs/en/v5/language/Type_system.html#pagetypesystem)页面）。它们在编译时是已知的：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 plot(close, color = color.gray)
 ```
 
 也可以使用仅当脚本开始在图表的第一个历史柱（柱零，即 或）上执行时才知道的信息来确定绘图的颜色，就像确定颜色所需的信息时的情况一样取决于脚本运行的图表。在这里，我们使用[syminfo.type](https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type)内置变量计算绘图颜色，该变量返回图表符号的类型。在这种情况下，合格的类型将是**“simple color”**：`bar_index == 0``barstate.isfirst == true``plotColor`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 plotColor = switch syminfo.type
     "stock"     => color.purple
@@ -225,9 +217,8 @@ printTable(syminfo.type)
 
 绘图颜色也可以通过脚本的输入来选择。在本例中，`lineColorInput`变量是**“输入颜色”**类型：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 color lineColorInput  = input(#1848CC, "Line color")
 plot(close, color = lineColorInput)
@@ -235,9 +226,8 @@ plot(close, color = lineColorInput)
 
 最后，绘图颜色也可以是*动态*值，即可以在每个条上改变的计算值。这些值属于**“系列颜色”**类型：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 plotColor = close >= open ? color.lime : color.red
 plot(close, color = plotColor)
@@ -247,9 +237,8 @@ plot(close, color = plotColor)
 
 ![../_images/Plots-PlottingConditionally-02.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Plots-PlottingConditionally-02.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Pivot plots", "", true)
 pivotHigh = fixnan(ta.pivothigh(3,3))
 plot(pivotHigh, "High pivot", ta.change(pivotHigh) ? na : color.olive, 3)
@@ -273,9 +262,8 @@ Pine Script™ 有一个[hline()](https://www.tradingview.com/pine-script-refere
 
 ![../_images/Plots-Levels-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Plots-Levels-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("CCI levels with `plot()`")
 plot(ta.cci(close, 20))
 plot(0,  "Zero", color.gray, 1, plot.style_circles)
@@ -298,9 +286,8 @@ plot(-300, "-300", color.new(color.red, 50),   1)
 
 该`offset`参数指定绘制线条时使用的偏移（负值偏移到过去，正值偏移到未来）。例如：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 plot(close, color = color.red, offset = -5)
 plot(close, color = color.lime, offset = 5)
@@ -316,16 +303,14 @@ plot(close, color = color.lime, offset = 5)
 
 [如果他们使用“const color”参数作为参数，plot()](https://www.tradingview.com/pine-script-reference/v5/#fun_plot) 会在总绘图计数中调用 count 1 `color`，这意味着它在编译时是已知的，例如：
 
-```
-Pine Script™
-Copiedplot(close, color = color.green)
+```javascript
+plot(close, color = color.green)
 ```
 
 当他们使用另一种限定类型（例如其中任何一种）时，它们将在总绘图计数中计数：
 
-```
-Pine Script™
-Copiedplot(close, color = syminfo.mintick > 0.0001 ? color.green : color.red) //🠆 "simple color"
+```javascript
+plot(close, color = syminfo.mintick > 0.0001 ? color.green : color.red) //🠆 "simple color"
 plot(close, color = input.color(color.purple)) //🠆 "input color"
 plot(close, color = close > open ? color.green : color.red) //🠆 "series color"
 plot(close, color = color.new(color.silver, close > open ? 40 : 0)) //🠆 "series color"
@@ -337,9 +322,8 @@ plot(close, color = color.new(color.silver, close > open ? 40 : 0)) //🠆 "seri
 
 ![../_images/Plots-Scale-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Plots-Scale-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("RSI")
 myRSI = ta.rsi(close, 20)
 bullColor = color.from_gradient(myRSI, 50, 80, color.new(color.lime, 70), color.new(color.lime, 0))
@@ -353,9 +337,8 @@ hline(50)
 
 如果我们尝试 通过将以下行添加到脚本中来在同一空间中绘制交易品种的[收盘值：](https://www.tradingview.com/pine-script-reference/v5/#var_close)
 
-```
-Pine Script™
-Copiedplot(close)
+```javascript
+plot(close)
 ```
 
 发生的情况是这样的：
@@ -372,9 +355,8 @@ Copiedplot(close)
 
 ![../_images/Plots-Scale-03.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Plots-Scale-03.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("RSI and TSI")
 myRSI = ta.rsi(close, 20)
 bullColor = color.from_gradient(myRSI, 50, 80, color.new(color.lime, 70), color.new(color.lime, 0))

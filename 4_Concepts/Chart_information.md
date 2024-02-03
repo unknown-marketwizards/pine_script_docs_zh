@@ -52,9 +52,8 @@ OHLCV 值的内置变量是：
 
 该脚本将在图表上显示这些内置变量的值：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`syminfo.*` built-ins", "", true)
 printTable(txtLeft, txtRight) =>
     var table t = table.new(position.middle_right, 2, 1)

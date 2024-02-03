@@ -4,9 +4,8 @@ barcolor [()](https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor
 
 该函数的签名是：
 
-```
-Pine Script™
-Copiedbarcolor(color, offset, editable, show_last, title) → void
+```javascript
+barcolor(color, offset, editable, show_last, title) → void
 ```
 
 着色可以是有条件的，因为`color`参数接受“系列颜色”参数。
@@ -15,9 +14,8 @@ Copiedbarcolor(color, offset, editable, show_last, title) → void
 
 ![../_images/BarColoring-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/BarColoring-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("barcolor example", overlay = true)
 isUp = close > open
 isDown = close <= open

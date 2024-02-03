@@ -34,7 +34,7 @@
   - [库函数](4_Concepts/Libraries.md)
   - [线与框](4_Concepts/Lines_and_boxes.md)
   - [非标准图表数据](4_Concepts/Non-standard_charts_data.md)
-  - [其他时间范围和数据](4_Concepts/Other_timeframes_and_data.md)
+  <!-- - [其他时间范围和数据](4_Concepts/Other_timeframes_and_data.md) -->
   - [绘制](4_Concepts/Plots.md)
   - [重画](4_Concepts/Repainting.md)
   - [会话](4_Concepts/Sessions.md)
@@ -43,3 +43,16 @@
   - [文本和形状](4_Concepts/Text_and_shapes.md)
   - [时间](4_Concepts/Time.md)
   - [时间框架](4_Concepts/Timeframes.md)
+- 编写脚本
+  - [风格指南](5_Writing/Style_guide.md)
+  - [调试](5_Writing/Debugging.md)
+  - [发布脚本](5_Writing/Publishing.md)
+  - [局限性](5_Writing/Limitations.md)
+- [常见问题](6_FAQ/FAQ.md)
+- [错误信息](7_Error_messages/Error_messages.md)
+- 迁移指南
+  - [至 Pine Script™ 版本 5 ](8_Migration_guides/To_Pine_version_5.md)
+  - [至 Pine Script™ 版本 4 ](8_Migration_guides/To_Pine_version_4.md)
+  - [至 Pine Script™ 版本 3 ](8_Migration_guides/To_Pine_version_3.md)
+- [更多信息](9_More_information/Where_can_I_get_more_information.md)
+

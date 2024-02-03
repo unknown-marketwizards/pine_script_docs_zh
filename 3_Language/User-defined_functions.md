@@ -26,9 +26,8 @@
 
 简单的函数通常可以用一行编写。这是单行函数的正式定义：
 
-```
-Pine Script™
-Copied<function_declaration>
+```javascript
+<function_declaration>
     <identifier>(<parameter_list>) => <return_value>
 
 <parameter_list>
@@ -43,16 +42,14 @@ Copied<function_declaration>
 
 这是一个例子：
 
-```
-Pine Script™
-Copiedf(x, y) => x + y
+```javascript
+f(x, y) => x + y
 ```
 
 声明函数后`f()`，可以使用不同类型的参数调用它：
 
-```
-Pine Script™
-Copieda = f(open, close)
+```javascript
+a = f(open, close)
 b = f(2, 2)
 c = f(open, 2)
 ```
@@ -63,9 +60,8 @@ c = f(open, 2)
 
 Pine Script™ 还支持具有以下语法的多行函数：
 
-```
-Pine Script™
-Copied<identifier>(<parameter_list>) =>
+```javascript
+<identifier>(<parameter_list>) =>
     <local_block>
 
 <identifier>(<list of parameters>) =>
@@ -76,9 +72,8 @@ Copied<identifier>(<parameter_list>) =>
 
 在哪里：
 
-```
-Pine Script™
-Copied<parameter_list>
+```javascript
+<parameter_list>
     {<parameter_definition>{, <parameter_definition>}}
 
 <parameter_definition>
@@ -89,9 +84,8 @@ Copied<parameter_list>
 
 表达式或声明的变量应该是函数体的最后一条语句。该表达式（或变量）的结果将是函数调用的结果。例如：
 
-```
-Pine Script™
-Copiedgeom_average(x, y) =>
+```javascript
+geom_average(x, y) =>
     a = x*x
     b = y*y
     math.sqrt(a + b)
@@ -113,9 +107,8 @@ Copiedgeom_average(x, y) =>
 
 在大多数情况下，函数仅返回一个结果，但可以返回结果列表（类似*元组*的结果）：
 
-```
-Pine Script™
-Copiedfun(x, y) =>
+```javascript
+fun(x, y) =>
     a = x+y
     b = x-y
     [a, b]
@@ -123,9 +116,8 @@ Copiedfun(x, y) =>
 
 调用此类函数需要特殊语法：
 
-```
-Pine Script™
-Copied[res0, res1] = fun(open, close)
+```javascript
+[res0, res1] = fun(open, close)
 plot(res0)
 plot(res1)
 ```

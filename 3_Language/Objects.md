@@ -18,9 +18,8 @@ Pine Script™ 对象是*用户定义类型*(UDT) 的实例。它们相当于包
 
 让我们定义一个`pivotPoint`类型来保存枢轴信息：
 
-```
-Pine Script™
-Copiedtype pivotPoint
+```javascript
+type pivotPoint
     int x
     float y
     string xloc = xloc.bar_time
@@ -37,39 +36,34 @@ Copiedtype pivotPoint
 
 现在我们的`pivotPoint`UDT 已定义，我们可以继续从中创建对象。我们使用 UDT 的`new()`内置方法创建对象。要从 UDT 创建新`foundPoint`对象`pivotPoint`，我们使用：
 
-```
-Pine Script™
-CopiedfoundPoint = pivotPoint.new()
+```javascript
+foundPoint = pivotPoint.new()
 ```
 
 我们还可以使用以下命令为创建的对象指定字段值：
 
-```
-Pine Script™
-CopiedfoundPoint = pivotPoint.new(time, high)
+```javascript
+foundPoint = pivotPoint.new(time, high)
 ```
 
 或者等价的：
 
-```
-Pine Script™
-CopiedfoundPoint = pivotPoint.new(x = time, y = high)
+```javascript
+foundPoint = pivotPoint.new(x = time, y = high)
 ```
 
 此时，该`foundPoint`对象的字段将包含创建时内置的 [时间](https://www.tradingview.com/pine-script-reference/v5/#var_time)`x`值 ，将包含[high](https://www.tradingview.com/pine-script-reference/v5/#var_high)值 ，并且该字段将包含其默认值 [xloc.bar_time](https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time) ，因为创建时没有为其定义值。目的。`y``xloc`
 
 还可以通过使用以下内容声明对象名称[来](https://www.tradingview.com/pine-script-reference/v5/#var_na)创建对象占位符 ：
 
-```
-Pine Script™
-CopiedpivotPoint foundPoint = na
+```javascript
+pivotPoint foundPoint = na
 ```
 
 此示例显示检测到高枢轴的标签。枢轴`legsInput`在出现后会被检测到，因此我们必须绘制过去的标签，以便它出现在枢轴上：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Pivot labels", overlay = true)
 int legsInput = input(10)
 
@@ -94,24 +88,21 @@ if not na(pivotHighPrice)
 
 请注意上面示例中的这一行：
 
-```
-Pine Script™
-CopiedfoundPoint = pivotPoint.new(time[legsInput], pivotHighPrice)
+```javascript
+foundPoint = pivotPoint.new(time[legsInput], pivotHighPrice)
 ```
 
 也可以使用以下形式编写：
 
-```
-Pine Script™
-CopiedpivotPoint foundPoint = na
+```javascript
+pivotPoint foundPoint = na
 foundPoint := pivotPoint.new(time[legsInput], pivotHighPrice)
 ```
 
 [当使用var](https://www.tradingview.com/pine-script-reference/v5/#op_var)或 [varip](https://www.tradingview.com/pine-script-reference/v5/#op_varip)创建对象时，这些关键字适用于该对象的所有字段：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 type barInfo
     int i = bar_index
@@ -135,16 +126,14 @@ plot(currentBar.i)
 
 我们前面的例子中的这一行：
 
-```
-Pine Script™
-CopiedfoundPoint = pivotPoint.new(time[legsInput], pivotHighPrice)
+```javascript
+foundPoint = pivotPoint.new(time[legsInput], pivotHighPrice)
 ```
 
 可以使用以下方式编写：
 
-```
-Pine Script™
-CopiedfoundPoint = pivotPoint.new()
+```javascript
+foundPoint = pivotPoint.new()
 foundPoint.x := time[legsInput]
 foundPoint.y := pivotHighPrice
 ```
@@ -157,16 +146,14 @@ Pine Script™ 集合（[数组](https://www.tradingview.com/pine-script-docs/en
 
 此示例声明一个空[数组](https://www.tradingview.com/pine-script-reference/v5/#type_array)，该数组将保存`pivotPoint`用户定义类型的对象：
 
-```
-Pine Script™
-CopiedpivotHighArray = array.new<pivotPoint>()
+```javascript
+pivotHighArray = array.new<pivotPoint>()
 ```
 
 要将变量的类型显式声明为[用户定义类型](https://www.tradingview.com/pine-script-docs/en/v5/language/Type_system.html#pagetypesystem-userdefinedtypes)的[数组](https://www.tradingview.com/pine-script-reference/v5/#type_array)、 [矩阵](https://www.tradingview.com/pine-script-reference/v5/#type_matrix)或 [映射](https://www.tradingview.com/pine-script-reference/v5/#type_map)，请使用集合的 type 关键字，后跟其[类型模板](https://www.tradingview.com/pine-script-docs/en/v5/language/Type_system.html#pagetypesystem-typetemplates)。例如：
 
-```
-Pine Script™
-Copiedvar array<pivotPoint> pivotHighArray = na
+```javascript
+var array<pivotPoint> pivotHighArray = na
 pivotHighArray := array.new<pivotPoint>()
 ```
 
@@ -174,9 +161,8 @@ pivotHighArray := array.new<pivotPoint>()
 
 ![../_images/Objects-CollectingObjects-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Objects-CollectingObjects-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Pivot Points High", overlay = true)
 
 int legsInput = input(10)
@@ -221,9 +207,8 @@ if barstate.islastconfirmedhistory
 
 在下面的示例中，我们创建一个`pivot1`对象并将其`x`字段设置为 1000。然后，我们声明一个`pivot2`包含对该`pivot1`对象的引用的变量，因此两者都指向同一个实例。因此，更改`pivot2.x`也会更改`pivot1.x`，因为两者都引用`x`同一对象的字段：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 type pivotPoint
     int x
@@ -241,9 +226,8 @@ plot(pivot2.x)
 
 在此示例中，我们声明`pivot2`引用`pivot1`对象的复制实例的变量。现在，改变`pivot2.x`不会改变`pivot1.x`，因为它指的是`x`一个单独对象的字段：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 type pivotPoint
     int x
@@ -261,9 +245,8 @@ plot(pivot2.x)
 
 在下面的示例中，我们定义了一个`InfoLabel`类型，其中一个字段为标签。该脚本实例化对象`shallow`的副本`parent`，然后调用用户定义的 `set()` [方法](https://www.tradingview.com/pine-script-docs/en/v5/language/Methods.html#pagemethods)来更新每个对象的`info`和`lbl`字段。由于`lbl`两个对象的字段都指向同一标签实例，因此任一对象中此字段的更改都会影响另一个对象：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Shallow Copy")
 
 type InfoLabel
@@ -290,9 +273,8 @@ shallow.set(bar_index, 1, "Shallow Copy")
 
 在这个例子中，我们定义了一个`deepCopy()`方法来实例化一个新`InfoLabel`对象，其`lbl`字段指向原始字段的副本。对`deep`副本字段的更改`lbl` 不会影响该`parent`对象，因为它指向一个单独的实例：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Deep Copy")
 
 type InfoLabel

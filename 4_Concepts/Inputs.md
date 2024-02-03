@@ -6,18 +6,16 @@
 
 以下脚本使用绘制 20 周期[简单移动平均线 (SMA)](https://www.tradingview.com/support/solutions/43000502589)。虽然写起来很简单，但它不是很灵活，因为它只会绘制特定的 MA：`ta.sma(close, 20)`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true)
 plot(ta.sma(close, 20))
 ```
 
 相反，如果我们以这种方式编写脚本，它会变得更加灵活，因为它的用户将能够选择源和他们想要用于 MA 计算的长度：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true)
 sourceInput = input(close, "Source")
 lengthInput = input(20, "Length")
@@ -64,9 +62,8 @@ plot(ta.sma(sourceInput, lengthInput))
 
 调用`input*.()`只是 Pine Script™ 中的另一个函数调用，其结果可以与 [算术](https://www.tradingview.com/pine-script-docs/en/v5/language/Operators.html#pageoperators-arithmeticoperators)、比较、 [逻辑](https://www.tradingview.com/pine-script-docs/en/v5/language/Operators.html#pageoperators-logicaloperators)或[三元](https://www.tradingview.com/pine-script-docs/en/v5/language/Operators.html#pageoperators-ternaryoperator) 运算符组合以形成要分配给变量的表达式。在这里，我们将调用 [input.string()](https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}string)的结果与 string进行比较`"On"`。然后表达式的结果存储在`plotDisplayInput`变量中。由于该变量保存一个`true`or`false`值，因此它是“输入 bool”类型：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Input in an expression`", "", true)
 bool plotDisplayInput = input.string("On", "Plot Display", options = ["On", "Off"]) == "On"
 plot(plotDisplayInput ? close : na)
@@ -105,16 +102,14 @@ plot(plotDisplayInput ? close : na)
 
 它的签名是：
 
-```
-Pine Script™
-Copiedinput(defval, title, tooltip, inline, group) → input int/float/bool/color/string | series float
+```javascript
+input(defval, title, tooltip, inline, group) → input int/float/bool/color/string | series float
 ```
 
 `defval`该函数通过分析函数调用中使用的参数类型来自动检测输入的类型。此脚本显示了所有支持的类型以及与`defval`不同类型的参数一起使用时函数返回的限定类型：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`input()`", "", true)
 a = input(1, "input int")
 b = input(1.0, "input float")
@@ -129,17 +124,15 @@ plot(na)
 
 [input.int()](https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int)函数存在两个签名 ；一个`options`是不使用时，另一个是：
 
-```
-Pine Script™
-Copiedinput.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
+```javascript
+input.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
 input.int(defval, title, options, tooltip, inline, group, confirm) → input int
 ```
 
 此调用使用`options`参数来建议 MA 的预定义长度列表：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true)
 maLengthInput = input.int(10, options = [3, 5, 7, 10, 14, 20, 50, 100, 200])
 ma = ta.sma(close, maLengthInput)
@@ -148,9 +141,8 @@ plot(ma)
 
 这个使用`minval`参数来限制长度：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true)
 maLengthInput = input.int(10, minval = 2)
 ma = ta.sma(close, maLengthInput)
@@ -165,17 +157,15 @@ plot(ma)
 
 [input.float()](https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}float)函数存在两个签名；一个`options`是不使用时，另一个是：
 
-```
-Pine Script™
-Copiedinput.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
+```javascript
+input.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
 input.int(defval, title, options, tooltip, inline, group, confirm) → input int
 ```
 
 在这里，我们使用“浮点”输入作为乘以标准差的因子，以计算布林线：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true)
 maLengthInput = input.int(10, minval = 1)
 bbFactorInput = input.float(1.5, minval = 0, step = 0.5)
@@ -196,9 +186,8 @@ plot(bbLo, "BB Lo", color.gray)
 
 让我们继续进一步开发我们的脚本，这次添加一个布尔输入以允许用户切换 BB 的显示：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true)
 maLengthInput = input.int(10,    "MA length", minval = 1)
 bbFactorInput = input.float(1.5, "BB factor", inline = "01", minval = 0, step = 0.5)
@@ -228,17 +217,15 @@ plot(showBBInput ? bbLo : na, "BB Lo", color.gray)
 
 [假设当高值](https://www.tradingview.com/pine-script-reference/v5/#var_high)和 [低值](https://www.tradingview.com/pine-script-reference/v5/#var_low) 高于/低于BB 时，我们希望将 BB 绘制为较浅的阴影 。您可以使用这样的代码来创建颜色：
 
-```
-Pine Script™
-CopiedbbHiColor = color.new(color.gray, high > bbHi ? 60 : 0)
+```javascript
+bbHiColor = color.new(color.gray, high > bbHi ? 60 : 0)
 bbLoColor = color.new(color.gray, low  < bbLo ? 60 : 0)
 ```
 
 当使用动态（或“系列”）颜色组件（例如此处的透明度）时，“设置/样式”中的颜色小部件将不再出现。让我们创建自己的，它将出现在我们的“输入”选项卡中：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true)
 maLengthInput = input.int(10,           "MA length", inline = "01", minval = 1)
 maColorInput  = input.color(color.aqua, "",          inline = "01")
@@ -272,9 +259,8 @@ plot(showBBInput ? bbLo : na, "BB Lo", bbLoColor, 2)
 
 让我们去掉前面部分中的 BB，并将时间范围输入添加到简单的 MA 脚本中：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true)
 tfInput = input.timeframe("D", "Timeframe")
 ma = ta.sma(close, 20)
@@ -298,9 +284,8 @@ input.symbol [()](https://www.tradingview.com/pine-script-reference/v5/#fun_inpu
 
 让我们在脚本中添加一个符号输入：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true)
 tfInput = input.timeframe("D", "Timeframe")
 symbolInput = input.symbol("", "Symbol")
@@ -326,9 +311,8 @@ plot(maHTF, "MA", color.aqua)
 
 会话信息还可以包含有关会话有效日期的信息。我们在这里使用[input.string()](https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}string) 函数调用来输入当天的信息：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Session input", "", true)
 string sessionInput = input.session("0600-1700", "Session")
 string daysInput = input.string("1234567", tooltip = "1 = Sunday, 7 = Saturday")
@@ -358,9 +342,8 @@ bgcolor(inSession ? color.silver : na)
 
 该脚本仅绘制用户对源的选择。我们建议将[高](https://www.tradingview.com/pine-script-reference/v5/#var_high)值作为默认值：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Source input", "", true)
 srcInput = input.source(high, "Source")
 plot(srcInput, "Src", color.new(color.purple, 70), 6)
@@ -376,9 +359,8 @@ plot(srcInput, "Src", color.new(color.purple, 70), 6)
 
 在这里，我们根据输入值测试柱的时间，并在输入值较大时绘制箭头：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Time input", "T", true)
 timeAndDateInput = input.time(timestamp("1 Aug 2021 00:00 +0300"), "Date and time")
 barIsLater = time > timeAndDateInput
@@ -391,9 +373,8 @@ plotchar(barIsLater, "barIsLater", "🠆", location.top, size = size.tiny)
 
 [Indicator()](https://www.tradingview.com/pine-script-reference/v5/#fun_indicator)函数的某些参数 在使用时将使用字段填充脚本的“输入”选项卡。参数是`timeframe`和`timeframe_gaps`。一个例子：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("MA", "", true, timeframe = "D", timeframe_gaps = false)
 plot(ta.vwma(close, 10))
 ```
@@ -416,9 +397,8 @@ plot(ta.vwma(close, 10))
 
 因为有时需要使用 Unicode 空格来实现输入的最佳对齐。这是一个例子：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Aligned inputs", "", true)
 
 var GRP1 = "Not aligned"

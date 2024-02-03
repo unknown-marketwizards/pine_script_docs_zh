@@ -6,9 +6,8 @@
 
 该函数具有以下签名：
 
-```
-Pine Script™
-Copiedhline(price, title, color, linestyle, linewidth, editable) → hline
+```javascript
+hline(price, title, color, linestyle, linewidth, editable) → hline
 ```
 
 [与plot()相比， ](https://www.tradingview.com/pine-script-reference/v5/#fun_plot)[hline()](https://www.tradingview.com/pine-script-reference/v5/#fun_hline) 有一些限制 ：
@@ -19,9 +18,8 @@ Copiedhline(price, title, color, linestyle, linewidth, editable) → hline
 
 让我们看看[hline()](https://www.tradingview.com/pine-script-reference/v5/#fun_hline) 在“真实强度指数”指标中的作用：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("TSI")
 myTSI = 100 * ta.tsi(close, 25, 13)
 
@@ -49,9 +47,8 @@ plot(myTSI)
 
 让我们在 TSI 指标中添加一些背景颜色：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("TSI")
 myTSI = 100 * ta.tsi(close, 25, 13)
 

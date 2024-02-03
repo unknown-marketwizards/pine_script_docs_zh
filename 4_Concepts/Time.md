@@ -40,9 +40,8 @@ TradingViewers 可以更改用于在其图表上显示柱时间的时区。 Pine
 
 ![../_images/时间-TimeZones-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Time-TimeZones-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Time zone control")
 MS_IN_1H = 1000 * 60 * 60
 TOOLTIP01 = "Enter your time zone's offset (+ or −), including a decimal fraction if needed."
@@ -74,9 +73,8 @@ printTable(
 
 ![../_images/时间-TimeZones-02.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Time-TimeZones-02.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator('`hour(time, "GMT+0")` in orange')
 color BLUE_LIGHT = #0000FF30
 plot(hour, "", BLUE_LIGHT, 8)
@@ -112,9 +110,8 @@ plot(hour(time, "GMT+0"),"UTC", color.orange)
 
 ![../_images/Time-TimeAndTimeclose-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Time-TimeAndTimeclose-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`time` and `time_close` values on bars")
 plot(time, "`time`")
 plot(time_close, "`time_close`")
@@ -138,9 +135,8 @@ plot(time_close, "`time_close`")
 
 [该脚本使用timenow](https://www.tradingview.com/pine-script-reference/v5/#var_timenow) 和[time_close](https://www.tradingview.com/pine-script-reference/v5/#var_time_close)的值 来计算日内柱的实时倒计时。与图表上的倒计时相反，只有当提要更新导致脚本执行另一次迭代时，此倒计时才会更新：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 
 printTable(txt) =>
@@ -158,9 +154,8 @@ printTable(str.format("{0,time,HH:mm:ss.SSS}", time_close - timenow))
 
 ![../_images/时间-CalendarDatesAndTimes-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Time-CalendarDatesAndTimes-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 firstDayIncorrect = dayofmonth == 1
 firstDay = ta.change(time("M"))
@@ -175,9 +170,8 @@ bgcolor(firstDay ? color.silver : na)
 
 如果您希望脚本仅在 2020 年及以后显示，您可以使用：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 plot(year >= 2020 ? close : na, linewidth = 3)
 ```
@@ -192,9 +186,8 @@ plot(year >= 2020 ? close : na, linewidth = 3)
 
 time [()](https://www.tradingview.com/pine-script-reference/v5/#fun_time)和 [time_close()](https://www.tradingview.com/pine-script-reference/v5/#fun_time_close) 函数具有以下签名：
 
-```
-Pine Script™
-Copiedtime(timeframe, session, timezone) → series int
+```javascript
+time(timeframe, session, timezone) → series int
 time_close(timeframe, session, timezone) → series int
 ```
 
@@ -225,9 +218,8 @@ time [()](https://www.tradingview.com/pine-script-reference/v5/#fun_time)函数�
 
 ![../_images/Time-Time()AndTimeclose()-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Time-Time()AndTimeclose()-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Session bars", "", true)
 inSession = not na(time(timeframe.period, "1100-1300"))
 bgcolor(inSession ? color.silver : na)
@@ -246,9 +238,8 @@ bgcolor(inSession ? color.silver : na)
 
 ![../_images/Time-TestingForChangesInHTF-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Time-TestingForChangesInHTF-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 bool newDay = ta.change(time("D"))
 bgcolor(newDay ? color.silver : na)
@@ -267,17 +258,15 @@ plotchar(newExchangeDay, "newExchangeDay", "🠇", location.top, size = size.sma
 
 日历日期和时间函数，例如 [year()](https://www.tradingview.com/pine-script-reference/v5/#fun_year)、 [month()](https://www.tradingview.com/pine-script-reference/v5/#fun_month)、 [weekofyear()](https://www.tradingview.com/pine-script-reference/v5/#fun_weekofyear)、 [dayofmonth()](https://www.tradingview.com/pine-script-reference/v5/#fun_dayofmonth)、 [dayofweek()](https://www.tradingview.com/pine-script-reference/v5/#fun_dayofweek)、 [hour()](https://www.tradingview.com/pine-script-reference/v5/#fun_hour)、 [min()](https://www.tradingview.com/pine-script-reference/v5/#fun_minute)和 [second()](https://www.tradingview.com/pine-script-reference/v5/#fun_second) 可用于测试特定日期或时间。它们都具有与此处所示的[dayofmonth()](https://www.tradingview.com/pine-script-reference/v5/#fun_dayofmonth)类似的签名 ：
 
-```
-Pine Script™
-Copieddayofmonth(time) → series int
+```javascript
+dayofmonth(time) → series int
 dayofmonth(time, timezone) → series int
 ```
 
 这将绘制柱线开盘日，其中 2021 年 1 月 1 日 00:00 时间位于其 [time](https://www.tradingview.com/pine-script-reference/v5/#var_time_close)和 [time_close](https://www.tradingview.com/pine-script-reference/v5/#var_time_close)值之间：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 exchangeDay = dayofmonth(timestamp("2021-01-01"))
 plot(exchangeDay)
@@ -289,9 +278,8 @@ plot(exchangeDay)
 
 timestamp [()](https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp)函数有几个不同的签名：
 
-```
-Pine Script™
-Copiedtimestamp(year, month, day, hour, minute, second) → simple/series int
+```javascript
+timestamp(year, month, day, hour, minute, second) → simple/series int
 timestamp(timezone, year, month, day, hour, minute, second) → simple/series int
 timestamp(dateString) → const int
 ```
@@ -302,9 +290,8 @@ timestamp(dateString) → const int
 
 [timestamp()](https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp) 对于生成特定日期的时间戳非常有用。要生成 2021 年 1 月 1 日的时间戳，请使用以下方法之一：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 yearBeginning1 = timestamp("2021-01-01")
 yearBeginning2 = timestamp(2021, 1, 1, 0, 0)
@@ -314,9 +301,8 @@ printTable(str.format("yearBeginning1: {0,date,yyyy.MM.dd hh:mm}\nyearBeginning2
 
 [您可以在timestamp()](https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp)参数中使用偏移量。在这里，我们从为其`day`参数提供的值中减去 2，以获取图表两天前最后一个柱的日期/时间。请注意，由于各种工具上的柱线对齐方式不同，图表上标识的柱线可能并不总是正好位于 48 小时之外，尽管函数的返回值是正确的：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 twoDaysAgo = timestamp(year, month, dayofmonth - 2, hour, minute)
 printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
@@ -329,9 +315,8 @@ printTable(str.format("{0,date,yyyy.MM.dd hh:mm}", twoDaysAgo))
 
 ![../_images/时间-FormattingDatesAndTime-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Time-FormattingDatesAndTime-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 
 print(txt, styl) =>

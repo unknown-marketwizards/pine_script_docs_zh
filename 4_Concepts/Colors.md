@@ -75,9 +75,8 @@ Pine Script™ 有 17 种内置颜色。此表列出了它们的名称、十六�
 
 ![../_images/颜色-UsingColors-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-UsingColors-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 // ————  Transparency (#99) is included in the hex value.
 plot(ta.sma(close, 10), "10", #80800099)
@@ -106,9 +105,8 @@ plot(ta.sma(close, 90), "90", #808000, transp = 40)
 
 ![../_images/颜色-ConditionalColors-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-ConditionalColors-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Conditional colors", "", true)
 int   lengthInput = input.int(20, "Length", minval = 2)
 color maBullColorInput = input.color(color.green, "Bull")
@@ -131,9 +129,8 @@ plot(ma, "MA", c_ma, 2)
 
 ![../_images/颜色-ConditionalColors-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-ConditionalColors-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Conditional colors", "", true)
 int legsInput = input.int(5, "Pivot Legs", minval = 1)
 color pHiColorInput = input.color(color.olive, "High pivots")
@@ -171,9 +168,8 @@ plot(pLo, "Low",  ta.change(pLo) ? na : pLoColorInput, 2, plot.style_line)
 
 ![../_images/Colors-CalculatedColors-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-CalculatingColors-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Volume")
 // We name our color constants to make them more readable.
 var color GOLD_COLOR   = #CCCC00ff
@@ -205,9 +201,8 @@ plot(volume, "Volume", volumeColor, 1, plot.style_columns)
 
 ![../_images/Colors-CalculateColors-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-CalculatingColors-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Holiday candles", "", true)
 float r = math.random(0, 255)
 float g = math.random(0, 255)
@@ -230,9 +225,8 @@ plotcandle(open, high, low, close, color = c_holiday, wickcolor = holidayColor, 
 
 ![../_images/Colors-CalculatedColors-3.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-CalculatingColors-3.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator(title="CCI line gradient", precision=2, timeframe="")
 var color GOLD_COLOR   = #CCCC00
 var color VIOLET_COLOR = #AA00FF
@@ -259,9 +253,8 @@ fill(bandTopPlotID, bandBotPlotID, color.new(BEIGE_COLOR, 90), "Background")
 
 ![../_images/Colors-CalculatedColors-4.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-CalculatingColors-4.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator(title="CCI line gradient", precision=2, timeframe="")
 var color GOLD_COLOR   = #CCCC00
 var color VIOLET_COLOR = #AA00FF
@@ -318,9 +311,8 @@ fill(bandTopPlotID, bandBotPlotID, bandColor, title = "Band")
 
 ![../_images/Colors-MishingTransparency-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-MixingTransparencies-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("CCI DC", precision = 6)
 color GOLD_COLOR   = #CCCC00ff
 color VIOLET_COLOR = #AA00FFff
@@ -412,9 +404,8 @@ bgcolor(bgColor)
 
 ![../_images/Colors-PlotCrispLines-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-PlotCrispLines-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 plot(high, "", color.new(color.orange, 80), 8)
 plot(high, "", color.new(color.orange, 60), 4)
@@ -440,9 +431,8 @@ plot(low, "", color.new(color.orange, 0), 1)
 
 如果您的脚本使用计算的颜色，即一种颜色，其中至少一个 RGBA 分量只能在运行时知道，那么“设置/样式”选项卡将不会为用户提供可用于修改绘图的常用颜色小部件颜色。不使用计算颜色的同一脚本的绘图也会受到影响。例如，在此脚本中，我们的第一个[plot()](https://www.tradingview.com/pine-script-reference/v5/#fun_plot)调用使用计算出的颜色，而第二个则不使用：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Calculated colors", "", true)
 float ma = ta.sma(close, 20)
 float maHeight = ta.percentrank(ma, 100)
@@ -463,9 +453,8 @@ plot(close, "Close", color.blue)
 
 ![../_images/颜色-ColorsSelection-3.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Colors-ColorsSelection-3.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Calculated colors", "", true)
 color maInput = input.color(color.purple, "MA")
 color closeInput = input.color(color.blue, "Close")

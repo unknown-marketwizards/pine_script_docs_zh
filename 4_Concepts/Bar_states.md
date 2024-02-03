@@ -12,9 +12,8 @@
 
 请注意，虽然指标和库实时运行所有价格或交易量更新，但不使用的策略则`calc_on_every_tick`不会；它们只会在实时栏关闭时执行。这将影响该类型脚本中条形状态的检测。例如，在开放市场上，此代码在实时关闭之前不会显示背景，因为那是策略运行的时间：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("S")
 bgcolor(barstate.islast ? color.silver : na)
 ```
@@ -25,9 +24,8 @@ bgcolor(barstate.islast ? color.silver : na)
 
 仅初始化第一个柱上的变量可能很有用，例如：
 
-```
-Pine Script™
-Copied// Declare array and set its values on the first bar only.
+```javascript
+// Declare array and set its values on the first bar only.
 FILL_COLOR = color.green
 var fillColors = array.new_color(0)
 if barstate.isfirst
@@ -45,9 +43,8 @@ if barstate.isfirst
 
 它可用于将代码的执行限制在图表的最后一个柱，这在绘制线条、标签或表格时通常很有用。在这里，我们用它来确定何时更新我们只想出现在最后一个栏上的标签。我们只创建标签一次，然后使用`label.set_*()`函数更新其属性，因为它更有效：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 // Create label on the first bar only.
 var label hiLabel = label.new(na, na, "")
@@ -74,9 +71,8 @@ if barstate.islast
 
 [barstate.isnew](https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew) 可用于在新的实时柱出现时重置[varip](https://www.tradingview.com/pine-script-reference/v5/#op_varip)`updateNo`变量。以下代码将在所有历史柱上以及每个实时柱的开头重置为 1。它计算每个实时柱期间实时更新的数量：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 updateNo() =>
     varip int updateNo = na
@@ -93,9 +89,8 @@ plot(updateNo())
 
 通过要求在条件变为 之前关闭实时栏来避免重新绘制可能很有用`true`。我们在这里使用它来保存 RSI 的绘图，直到实时柱关闭并成为经过的实时柱。它将绘制在历史柱上，因为[barstate.isconfirmed](https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed) 始终`true`位于历史柱上：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 myRSI = ta.rsi(close, 20)
 plot(barstate.isconfirmed ? myRSI : na)
@@ -113,9 +108,8 @@ plot(barstate.isconfirmed ? myRSI : na)
 
 以下是使用变量的脚本示例`barstate.*`：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Bar States", overlay = true, max_labels_count = 500)
 
 stateText() =>

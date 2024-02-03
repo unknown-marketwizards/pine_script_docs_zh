@@ -20,9 +20,8 @@ Pine Script™ 映射是以*键值对形式*存储元素的集合。它们允许
 
 Pine Script™ 使用以下语法来声明映射：
 
-```
-Pine Script™
-Copied[var/varip ][map<keyType, valueType> ]<identifier> = <expression>
+```javascript
+[var/varip ][map<keyType, valueType> ]<identifier> = <expression>
 ```
 
 映射的[类型模板](https://www.tradingview.com/pine-script-docs/en/v5/language/Type_system.html#pagetypesystem-typetemplates)在哪里，它声明它将包含的键和值的类型，并且返回映射实例或.`<keyType, valueType>``<expression>``na`
@@ -31,18 +30,16 @@ Copied[var/varip ][map<keyType, valueType> ]<identifier> = <expression>
 
 例如，这行代码声明一个新`myMap`变量，它可以接受保存 [字符串](https://www.tradingview.com/pine-script-reference/v5/#type_string)键和 [浮点](https://www.tradingview.com/pine-script-reference/v5/#type_float)值对的映射实例：
 
-```
-Pine Script™
-Copiedmap<string, float> myMap = na
+```javascript
+map<string, float> myMap = na
 ```
 
 当`<expression>`不是时`na`，编译器不需要显式类型声明，因为它将从分配的映射对象推断类型信息。
 
 此行声明一个`myMap`分配给带有 [字符串](https://www.tradingview.com/pine-script-reference/v5/#type_string)键和 [浮点](https://www.tradingview.com/pine-script-reference/v5/#type_float)值的空映射的变量。稍后分配给该变量的任何映射都必须具有相同的键和值类型：
 
-```
-Pine Script™
-CopiedmyMap = map.new<string, float>()
+```javascript
+myMap = map.new<string, float>()
 ```
 
 
@@ -55,9 +52,8 @@ CopiedmyMap = map.new<string, float>()
 
 ![../_images/Maps-声明-映射-使用-var-and-varip-keywords-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Declaring-a-map-Using-var-and-varip-keywords-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("var map demo")
 
 //@variable A map associating color values with string keys.
@@ -105,9 +101,8 @@ map.put [()](https://www.tradingview.com/pine-script-reference/v5/#fun_map.put)�
 
 ![../_images/Maps-Reading-and-writing-Putting-and-getting-key-value-pairs-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Reading-and-writing-Putting-and-getting-key-value-pairs-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Putting and getting demo")
 
 //@variable The length of the `ta.rising()` and `ta.falling()` calculation.
@@ -147,9 +142,8 @@ plot(index, color = indexColor, style = plot.style_columns)
 
 ![../_images/Maps-Reading-and-writing-Putting-and-getting-key-value-pairs-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Reading-and-writing-Putting-and-getting-key-value-pairs-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Putting and getting objects demo")
 
 //@type A custom type to hold OHLC data.
@@ -210,9 +204,8 @@ plotcandle(oldest.o, oldest.h, oldest.l, oldest.c)
 
 ![../_images/Maps-Reading-and-writing-Inspecting-keys-and-values-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Reading-and-writing-Inspecting-keys-and-values-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Keys and values demo")
 
 if bar_index % 50 == 0
@@ -248,9 +241,8 @@ if bar_index % 50 == 0
 
 ![../_images/Maps-Reading-and-writing-Inspecting-keys-and-values-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Reading-and-writing-Inspecting-keys-and-values-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Keys and values demo")
 
 if bar_index % 50 == 0
@@ -294,9 +286,8 @@ if bar_index % 50 == 0
 
 ![../_images/Maps-Reading-and-writing-Inspecting-keys-and-values-3.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Reading-and-writing-Inspecting-keys-and-values-3.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Inspecting keys demo")
 
 //@variable A map containing `string` keys and `string` values.
@@ -341,9 +332,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Maps-Reading-and-writing-Removing-key-value-pairs-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Reading-and-writing-Removing-key-value-pairs-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Removing key-value pairs demo")
 
 //@function Returns a label to display the keys and values from a map.
@@ -399,9 +389,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Maps-Reading-and-writing-Combining-maps-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Reading-and-writing-Combining-maps-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Combining maps demo", "Hex map")
 
 //@variable An array of string hex digits.
@@ -465,9 +454,8 @@ if bar_index == last_bar_index - 1
 
 脚本可以通过多种方式迭代访问映射中的键和值。例如，可以循环遍历映射的 [keys()](https://www.tradingview.com/pine-script-reference/v5/#fun_map.keys)数组并 [get()](https://www.tradingview.com/pine-script-reference/v5/#fun_map.get)每个 的值`key`，如下所示：
 
-```
-Pine Script™
-Copiedfor key in thisMap.keys()
+```javascript
+for key in thisMap.keys()
     value = thisMap.get(key)
 ```
 
@@ -475,18 +463,16 @@ Copiedfor key in thisMap.keys()
 
 例如，这行代码从放入其中的第一个键值对开始循环遍历 every`key`和`value`in ：`thisMap`
 
-```
-Pine Script™
-Copiedfor [key, value] in thisMap
+```javascript
+for [key, value] in thisMap
 ```
 
 [让我们使用此结构编写一个脚本，在表](https://www.tradingview.com/pine-script-reference/v5/#type_table)中显示映射的键值对 。在下面的示例中，我们定义了一个自定义`toTable()`方法来创建 [table](https://www.tradingview.com/pine-script-reference/v5/#type_table)，然后使用`for...in` 循环迭代映射的键值对并填充表的单元格。该脚本使用此方法来可视化包含价格和交易量数据的`length`-bar的映射`averages`：
 
 ![../_images/Maps-Looping-through-a-map-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Looping-through-a-map-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Looping through a map demo", "Table of averages")
 
 //@variable The length of the moving average.
@@ -572,9 +558,8 @@ averages.toTable(header = headerText, textSize = txtSize)
 
 ![../_images/Maps-复制-a-map-Shallow-copies-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Copying-a-map-Shallow-copies-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Shallow copy demo")
 
 //@function Displays the key-value pairs of `this` map in a label.
@@ -628,9 +613,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Maps-复制-a-map-Deep-copies-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Copying-a-map-Deep-copies-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Deep copy demo")
 
 //@function Returns a deep copy of `this` map.
@@ -694,9 +678,8 @@ if bar_index == last_bar_index - 1
 
 ![../_images/Maps-Scope-and-history-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Scope-and-history-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Scope and history demo", overlay = true)
 
 //@variable The source value for EMA calculation.
@@ -744,18 +727,16 @@ plot(globalData.get(50), "50-bar EMA", color.orange, 3)
 
 例如，假设我们要创建一个“2D”映射，它使用 [字符串](https://www.tradingview.com/pine-script-reference/v5/#type_string)键来访问 包含 [字符串](https://www.tradingview.com/pine-script-reference/v5/#type_string)键和 [浮点值对的](https://www.tradingview.com/pine-script-reference/v5/#type_float)*嵌套映射*。由于映射不能使用其他集合作为值，因此我们首先创建一个*包装类型*，其中包含一个字段来保存实例，如下所示：`map<string, float>`
 
-```
-Pine Script™
-Copied//@type A wrapper type for maps with `string` keys and `float` values.
+```javascript
+//@type A wrapper type for maps with `string` keys and `float` values.
 type Wrapper
     map<string, float> data
 ```
 
 定义类型后`Wrapper`，我们可以创建 [字符串](https://www.tradingview.com/pine-script-reference/v5/#type_string)键和 `Wrapper`值的映射，其中`data`映射中每个值的字段都指向一个实例：`map<string, float>`
 
-```
-Pine Script™
-CopiedmapOfMaps = map.new<string, Wrapper>()
+```javascript
+mapOfMaps = map.new<string, Wrapper>()
 ```
 
 下面的脚本使用此概念构建一个映射，其中包含保存多个代码请求的 OHLCV 数据的映射。用户定义的`requestData()`函数从股票代码请求价格和交易量数据，创建映射， [将](https://www.tradingview.com/pine-script-reference/v5/#fun_map.put)数据放入其中，然后返回 包含新映射的实例。`<string, float>``Wrapper`
@@ -764,9 +745,8 @@ CopiedmapOfMaps = map.new<string, Wrapper>()
 
 ![../_images/Maps-Maps-of-other-collections-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Maps-Maps-of-other-collections-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Nested map demo")
 
 //@variable The timeframe of the requested data.

@@ -72,9 +72,8 @@
 
 ![../_images/Repainting-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Repainting-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Repainting", "", true)
 ma = ta.ema(close, 5)
 xUp = ta.crossover(close, ma)
@@ -91,9 +90,8 @@ bgcolor(xUp ? color.new(color.lime, 80) : xDn ? color.new(color.fuchsia, 80) : n
 
 我们可以通过多种方式实现这一目标。此方法 为我们的交叉检测添加了一个条件，这要求脚本在柱的最后一次迭代（即收盘价和价格确认时）执行。这是避免重画的简单方法：`and barstate.isconfirmed`
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Repainting", "", true)
 ma = ta.ema(close, 5)
 xUp = ta.crossover(close, ma) and barstate.isconfirmed
@@ -104,9 +102,8 @@ bgcolor(xUp ? color.new(color.lime, 80) : xDn ? color.new(color.fuchsia, 80) : n
 
 这使用在前一柱上检测到的交叉：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Repainting", "", true)
 ma = ta.ema(close, 5)
 xUp = ta.crossover(close, ma)[1]
@@ -117,9 +114,8 @@ bgcolor(xUp ? color.new(color.lime, 80) : xDn ? color.new(color.fuchsia, 80) : n
 
 这仅使用确认的[收盘价](https://www.tradingview.com/pine-script-reference/v5/#var_close) 和 EMA 值进行计算：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Repainting", "", true)
 ma = ta.ema(close[1], 5)
 xUp = ta.crossover(close[1], ma)
@@ -130,9 +126,8 @@ bgcolor(xUp ? color.new(color.lime, 80) : xDn ? color.new(color.fuchsia, 80) : n
 
 这会检测实时柱的[开盘价](https://www.tradingview.com/pine-script-reference/v5/#var_open) 与前一柱的 EMA 值之间的交叉。请注意，EMA 是使用 [close](https://www.tradingview.com/pine-script-reference/v5/#var_close)计算的，因此它会重新绘制。我们必须确保使用确认值来检测交叉，因此`ma[1]` 在交叉检测逻辑中：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Repainting", "", true)
 ma = ta.ema(close, 5)
 xUp = ta.crossover(open, ma[1])
@@ -157,9 +152,8 @@ request.security [()](https://www.tradingview.com/pine-script-reference/v5/#fun_
 
 ![../_images/Repainting-Repainting-request-security-calls-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Repainting-Repainting-request-security-calls-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Repainting vs non-repainting `request.security()` demo", overlay = true)
 
 //@variable The timeframe to request data from.
@@ -191,9 +185,8 @@ bgcolor(barstate.isrealtime ? color.new(color.orange, 60) : na, title = "Realtim
 
 为了便于重用，下面是一个简单的`noRepaintSecurity()`函数，可以在脚本中应用该函数来请求非重绘更高的时间范围值：
 
-```
-Pine Script™
-Copied//@function Requests non-repainting `expression` values from the context of the `symbol` and `timeframe`.
+```javascript
+//@function Requests non-repainting `expression` values from the context of the `symbol` and `timeframe`.
 noRepaintSecurity(symbol, timeframe, expression) =>
     request.security(symbol, timeframe, expression[1], lookahead = barmerge.lookahead_on)
 ```
@@ -226,9 +219,8 @@ noRepaintSecurity(symbol, timeframe, expression) =>
 
 ![../_images/Repainting-FutureLeakWithRequestSecurity-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Repainting-FutureLeakWithRequestSecurity-01.png)
 
-```
-Pine Script™
-Copied// FUTURE LEAK! DO NOT USE!
+```javascript
+// FUTURE LEAK! DO NOT USE!
 //@version=5
 indicator("Future leak", "", true)
 futureHigh = request.security(syminfo.tickerid, "1D", high, lookahead = barmerge.lookahead_on)
@@ -271,9 +263,8 @@ plot(futureHigh)
 
 让我们看一个显示高枢轴价格的脚本，该脚本将价格置于过去（检测到枢轴后 5 个柱）：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Plotting in the past", "", true)
 pHi = ta.pivothigh(5, 5)
 if not na(pHi)
@@ -289,9 +280,8 @@ if not na(pHi)
 
 为其他人开发脚本时解决此问题的最佳解决方案是默认情况下**不带**偏移量地进行绘图，但为脚本用户提供过去通过输入打开绘图的选项，因此他们必须知道脚本正在做什么，例如:
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Plotting in the past", "", true)
 plotInThePast = input(false, "Plot in the past")
 pHi = ta.pivothigh(5, 5)

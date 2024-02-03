@@ -31,9 +31,8 @@
 
 该脚本使用 Pine Script™ 中可用的四种方法显示文本：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Four displays of text", overlay = true)
 plotchar(ta.rising(close, 5), "`plotchar()`", "🠅", location.belowbar, color.lime, size = size.small)
 plotshape(ta.falling(close, 5), "`plotchar()`", location = location.abovebar, color = na, text = "•`plotshape()•`\n🠇", textcolor = color.fuchsia, size = size.huge)
@@ -62,18 +61,16 @@ printTable("•TABLE•\n" + str.tostring(bar_index + 1) + " bars\nin the datase
 
 此函数对于在条上显示单个字符很有用。它具有以下语法：
 
-```
-Pine Script™
-Copiedplotchar(series, title, char, location, color, offset, text, textcolor, editable, size, show_last, display) → void
+```javascript
+plotchar(series, title, char, location, color, offset, text, textcolor, editable, size, show_last, display) → void
 ```
 
 有关其参数的详细信息，请参阅[plotchar() 的参考手册条目。](https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar)
 
 [正如调试页面](https://www.tradingview.com/pine-script-docs/en/v5/writing/Debugging.html#pagedebugging)[的何时必须保留脚本的比例](https://www.tradingview.com/pine-script-docs/en/v5/writing/Debugging.html#pagedebugging-whenthescriptsscalemustbepreserved) 部分中所述，该函数可用于显示和检查数据窗口中的值或图表上脚本名称右侧显示的指标值中的值：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 plotchar(bar_index, "Bar index", "", location.top)
 ```
@@ -88,9 +85,8 @@ plotchar(bar_index, "Bar index", "", location.top)
 
 [plotchar()](https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar) 还可以很好地识别图表上的特定点或验证条件是否`true`符合我们的预期。此示例在柱形下方显示一个向上箭头，其中 [收盘价](https://www.tradingview.com/pine-script-reference/v5/#var_close)、 [最高价](https://www.tradingview.com/pine-script-reference/v5/#var_high)和 [交易量](https://www.tradingview.com/pine-script-reference/v5/#var_volume) 在两根柱形中均呈上升趋势：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 bool longSignal = ta.rising(close, 2) and ta.rising(high, 2) and (na(volume) or ta.rising(volume, 2))
 plotchar(longSignal, "Long", "▲", location.belowbar, color = na(volume) ? color.gray : color.blue, size = size.tiny)
@@ -107,9 +103,8 @@ plotchar(longSignal, "Long", "▲", location.belowbar, color = na(volume) ? colo
 
 如果您不介意只绘制圆形，您也可以使用[plot()](https://www.tradingview.com/pine-script-reference/v5/#fun_plot) 来实现类似的效果：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 longSignal = ta.rising(close, 2) and ta.rising(high, 2) and (na(volume) or ta.rising(volume, 2))
 plot(longSignal ? low - ta.tr : na, "Long", color.blue, 2, plot.style_circles)
@@ -123,18 +118,16 @@ plot(longSignal ? low - ta.tr : na, "Long", color.blue, 2, plot.style_circles)
 
 此功能对于在条形上显示预定义的形状和/或文本非常有用。它具有以下语法：
 
-```
-Pine Script™
-Copiedplotshape(series, title, style, location, color, offset, text, textcolor, editable, size, show_last, display) → void
+```javascript
+plotshape(series, title, style, location, color, offset, text, textcolor, editable, size, show_last, display) → void
 ```
 
 有关其参数的详细信息，请参阅[plotshape() 的参考手册条目。](https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape)
 
 让我们使用该函数来实现与上一节的第二个示例大致相同的结果：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 longSignal = ta.rising(close, 2) and ta.rising(high, 2) and (na(volume) or ta.rising(volume, 2))
 plotshape(longSignal, "Long", shape.arrowup, location.belowbar)
@@ -146,9 +139,8 @@ plotshape(longSignal, "Long", shape.arrowup, location.belowbar)
 
 可以使用不同的[plotshape()](https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape) 调用在条形图上叠加文本。您将需要使用`\n`后跟一个特殊的非打印字符，该字符不会被删除以保留换行符的功能。这里我们使用 Unicode 零宽度空格 (U+200E)。虽然您在以下代码的字符串中看不到它，但它确实存在并且可以复制/粘贴。特殊的 Unicode 字符必须是字符串中的**最后**一个字符，以便文本向上，并且当您在条形图下方绘图且文本向下时，**第一个字符必须是：**
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Lift text", "", true)
 plotshape(true, "", shape.arrowup,   location.abovebar, color.green,  text = "A")
 plotshape(true, "", shape.arrowup,   location.abovebar, color.lime,   text = "B\n")
@@ -173,9 +165,8 @@ plotshape(true, "", shape.arrowdown, location.belowbar, color.maroon, text = "\n
 
 plotarrow 函数根据函数第一个参数中使用的系列的相对值显示可变长度的向上或向下箭头[。](https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow)它具有以下语法：
 
-```
-Pine Script™
-Copiedplotarrow(series, title, colorup, colordown, offset, minheight, maxheight, editable, show_last, display) → void
+```javascript
+plotarrow(series, title, colorup, colordown, offset, minheight, maxheight, editable, show_last, display) → void
 ```
 
 有关其参数的详细信息，请参阅[plotarrow() 的参考手册条目。](https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow)
@@ -190,9 +181,8 @@ Copiedplotarrow(series, title, colorup, colordown, offset, minheight, maxheight,
 
 这是一个简单的脚本，说明了[plotarrow()](https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow)的工作原理：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 body = close - open
 plotarrow(body, colorup = color.teal, colordown = color.orange)
@@ -204,9 +194,8 @@ plotarrow(body, colorup = color.teal, colordown = color.orange)
 
 您可以使用任何系列来绘制箭头。这里我们使用“Chaikin Oscillator”的值来控制箭头的位置和大小：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Chaikin Oscillator Arrows", overlay = true)
 fastLengthInput = input.int(3,  minval = 1)
 slowLengthInput = input.int(10, minval = 1)
@@ -252,9 +241,8 @@ plotarrow(osc)
 
 label.new [()](https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new) 函数创建一个新标签。它具有以下签名：
 
-```
-Pine Script™
-Copiedlabel.new(x, y, text, xloc, yloc, color, style, textcolor, size, textalign, tooltip) → series label
+```javascript
+label.new(x, y, text, xloc, yloc, color, style, textcolor, size, textalign, tooltip) → series label
 ```
 
 允许您更改标签属性的*setter*函数有：
@@ -274,9 +262,8 @@ Copiedlabel.new(x, y, text, xloc, yloc, color, style, textcolor, size, textalign
 
 他们都有一个相似的签名。[label.set_color()](https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color)的一个是：
 
-```
-Pine Script™
-Copiedlabel.set_color(id, color) → void
+```javascript
+label.set_color(id, color) → void
 ```
 
 在哪里：
@@ -286,9 +273,8 @@ Copiedlabel.set_color(id, color) → void
 
 您可以通过以下方式以最简单的形式创建标签：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 label.new(bar_index, high)
 ```
@@ -305,9 +291,8 @@ label.new(bar_index, high)
 
 在下一个示例中，我们在最近 50 个柱中具有最高[高](https://www.tradingview.com/pine-script-reference/v5/#var_high)值的柱上显示一个标签：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 
 // Find the highest `high` in last 50 bars and its offset. Change it's sign so it is positive.
@@ -338,9 +323,8 @@ if ta.change(hi)
 
 在这里，我们在每个条形上创建一个标签，但我们根据条形的极性有条件地设置其属性：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 lbl = label.new(bar_index, na)
 if close >= open
@@ -400,9 +384,8 @@ else
 
 让我们在最后一个柱上的日期前一天放置一个标签：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 daysAgoInput = input.int(1, tooltip = "Use negative values to offset in the future")
 if barstate.islast
@@ -415,9 +398,8 @@ if barstate.islast
 
 您还可以使用值的柱索引进行偏移`x`，例如：
 
-```
-Pine Script™
-Copiedlabel.new(bar_index + 10, high)
+```javascript
+label.new(bar_index + 10, high)
 label.new(bar_index - 10, high[10])
 label.new(bar_index[10], high[10])
 ```
@@ -432,9 +414,8 @@ label.new(bar_index[10], high[10])
 
 他们都有一个相似的签名。[label.get_text()](https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}get_text)的一个是：
 
-```
-Pine Script™
-Copiedlabel.get_text(id) → series string
+```javascript
+label.get_text(id) → series string
 ```
 
 其中`id`是要检索其文本的标签。
@@ -443,25 +424,22 @@ Copiedlabel.get_text(id) → series string
 
 label.copy [()](https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}copy) 函数用于克隆标签。其语法为：
 
-```
-Pine Script™
-Copiedlabel.copy(id) → void
+```javascript
+label.copy(id) → void
 ```
 
 ### [删除标签](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Text_and_shapes.html#id14)
 
 label.delete [()](https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete) 函数用于删除标签。其语法为：
 
-```
-Pine Script™
-Copiedlabel.delete(id) → void
+```javascript
+label.delete(id) → void
 ```
 
 要仅在图表上保留用户定义数量的标签，可以使用如下代码：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 MAX_LABELS = 500
 indicator("", max_labels_count = MAX_LABELS)
 qtyLabelsInput = input.int(5, "Labels to keep", minval = 0, maxval = MAX_LABELS)
@@ -483,9 +461,8 @@ plot(myRSI)
 
 请注意，如果只想将标签放置在最后一个柱上，则当脚本在所有柱上执行时创建和删除标签是不必要且低效的，因此仅保留最后一个标签：
 
-```
-Pine Script™
-Copied// INEFFICENT!
+```javascript
+// INEFFICENT!
 //@version=5
 indicator("", "", true)
 lbl = label.new(bar_index, high, str.tostring(high, format.mintick))
@@ -494,9 +471,8 @@ label.delete(lbl[1])
 
 这是实现相同任务的有效方法：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 if barstate.islast
     // Create the label once, the first time the block executes on the last bar.
@@ -512,9 +488,8 @@ if barstate.islast
 
 该脚本演示了在实时栏运行时回滚的效果：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 label.new(bar_index, high)
 ```

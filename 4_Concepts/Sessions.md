@@ -21,9 +21,8 @@
 
 [与time()](https://www.tradingview.com/pine-script-reference/v5/#fun_time)和 [time_close()](https://www.tradingview.com/pine-script-reference/v5/#fun_time_close)一起使用的会话字符串必须具有特定的格式。它们的语法是：
 
-```
-Pine Script™
-Copied<time_period>:<days>
+```javascript
+<time_period>:<days>
 ```
 
 在哪里：
@@ -80,9 +79,8 @@ Copied<time_period>:<days>
 
 使用会话字符串定义的会话属性独立于交易所定义的会话（确定工具何时可以交易）。程序员可以完全自由地创建适合其目的的任何会话定义，这通常是检测柱线何时属于特定时间段。这是通过使用[time()](https://www.tradingview.com/pine-script-reference/v5/#fun_time)函数的以下两个签名之一在 Pine Script™ 中完成的 ：
 
-```
-Pine Script™
-Copiedtime(timeframe, session, timezone) → series int
+```javascript
+time(timeframe, session, timezone) → series int
 time(timeframe, session) → series int
 ```
 
@@ -90,9 +88,8 @@ time(timeframe, session) → series int
 
 ![../_images/Sessions-UsingSessionStrings-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Sessions-UsingSessionStrings-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Opening high/low", overlay = true)
 
 sessionInput = input.session("0930-0935")
@@ -144,9 +141,8 @@ plot(hi, "hi", color.lime,    2, plot.style_circles)
 
 ![../_images/Sessions-RegularAndExtendedSessions-01.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Sessions-RegularAndExtendedSessions-01.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Example 1: Regular Session Data")
 regularSessionData = request.security("NASDAQ:AAPL", timeframe.period, close, barmerge.gaps_on)
 plot(regularSessionData, style = plot.style_linebr)
@@ -156,9 +152,8 @@ plot(regularSessionData, style = plot.style_linebr)
 
 ![../_images/Sessions-RegularAndExtendedSessions-02.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Sessions-RegularAndExtendedSessions-02.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Example 2: Extended Session Data")
 t = ticker.new("NASDAQ", "AAPL", session.extended)
 extendedSessionData = request.security(t, timeframe.period, close, barmerge.gaps_on)
@@ -169,9 +164,8 @@ plot(extendedSessionData, style = plot.style_linebr)
 
 ticker.new [()](https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new) 函数具有以下签名：
 
-```
-Pine Script™
-Copiedticker.new(prefix, ticker, session, adjustment) → simple string
+```javascript
+ticker.new(prefix, ticker, session, adjustment) → simple string
 ```
 
 在哪里：
@@ -183,9 +177,8 @@ Copiedticker.new(prefix, ticker, session, adjustment) → simple string
 
 我们的第一个例子可以重写为：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Example 1: Regular Session Data")
 t = ticker.new("NASDAQ", "AAPL", session.regular)
 regularSessionData = request.security(t, timeframe.period, close, barmerge.gaps_on)
@@ -194,9 +187,8 @@ plot(regularSessionData, style = plot.style_linebr)
 
 如果您想使用与图表主要交易品种相同的会话规范，请省略[ticker.new()](https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new)中的第三个参数；它是可选的。如果您希望代码明确声明您的意图，请使用[syminfo.session](https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session) 内置变量。它保存图表主要交易品种的会话类型：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Example 1: Regular Session Data")
 t = ticker.new("NASDAQ", "AAPL", syminfo.session)
 regularSessionData = request.security(t, timeframe.period, close, barmerge.gaps_on)

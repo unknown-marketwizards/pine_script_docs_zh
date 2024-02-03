@@ -16,9 +16,8 @@ Pine Script™ 库是包含可在指标、策略或其他库中重用的函数�
 
 库脚本具有以下结构，其中必须定义一个或多个可导出函数：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 
 // @description <library_description>
 library(title, overlay)
@@ -43,9 +42,8 @@ export <function_name>([simple/series] <parameter_type> <parameter_name> [= <def
 
 这是一个示例库：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 
 // @description Provides functions calculating the all-time high/low of values.
 library("AllTimeHighLow", true)
@@ -93,9 +91,8 @@ plot(lo())
 
 调用库函数时提供的参数的限定类型是根据每个参数在函数内部的使用方式自动检测的。如果论证可以用作“系列”，那么它就被限定为“系列”。如果不能，则尝试使用“simple”类型限定符。这解释了为什么这段代码：
 
-```
-Pine Script™
-Copiedexport myEma(int x) =>
+```javascript
+export myEma(int x) =>
     ta.ema(close, x)
 ```
 
@@ -103,17 +100,15 @@ Copiedexport myEma(int x) =>
 
 虽然库函数不能返回“常量”或“输入”值，但可以编写它们来产生“简单”结果。这使得它们比返回“系列”结果的函数在更多上下文中有用，因为某些内置函数不允许“系列”参数。例如，[request.security()](https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security) 需要一个“简单字符串”作为其`symbol`参数。如果我们编写一个库函数来按以下方式组装参数`symbol`，则该函数的结果将不起作用，因为它是“系列字符串”限定类型：
 
-```
-Pine Script™
-Copiedexport makeTickerid(string prefix, string ticker) =>
+```javascript
+export makeTickerid(string prefix, string ticker) =>
     prefix + ":" + ticker
 ```
 
 然而，通过将参数限定符限制为“simple”，我们可以强制函数产生“simple”结果。我们可以通过在参数类型前加上 [simple](https://www.tradingview.com/pine-script-reference/v5/#op_simple)关键字来实现这一点：
 
-```
-Pine Script™
-Copiedexport makeTickerid(simple string prefix, simple string ticker) =>
+```javascript
+export makeTickerid(simple string prefix, simple string ticker) =>
     prefix + ":" + ticker
 ```
 
@@ -129,9 +124,8 @@ Copiedexport makeTickerid(simple string prefix, simple string ticker) =>
 
 要导出 UDT，请在其定义前加上[导出](https://www.tradingview.com/pine-script-reference/v5/#op_export) 关键字，就像导出函数一样：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 library("Point")
 
 export type point
@@ -143,9 +137,8 @@ export type point
 
 导入该库并从其`point`UDT 创建对象的脚本看起来有点像这样：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 import userName/Point/1 as pt
 newPoint = pt.point.new()
@@ -162,9 +155,8 @@ newPoint = pt.point.new()
 
 当库仅在内部使用 UDT 时，无需将其导出。以下库`point`内部使用了 UDT，但仅`drawPivots()`导出其函数，不使用参数也不返回`point`类型的结果：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 library("PivotLabels", true)
 
 // We use this `point` UDT in the library, but it does NOT require exporting because:
@@ -250,9 +242,8 @@ drawPivots(20, 10, 5)
 
 如果 TradingView 用户发布了上述库，则可以这样使用：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 import TradingView/PivotLabels/1 as dpl
 dpl.drawPivots(20, 10, 10)
@@ -291,9 +282,8 @@ dpl.drawPivots(20, 10, 10)
 
 使用另一个脚本中的库（可以是指标、策略或另一个库）是通过[import](https://www.tradingview.com/pine-script-reference/v5/#op_import)语句完成的：
 
-```
-Pine Script™
-Copiedimport <username>/<libraryName>/<libraryVersion> [as <alias>]
+```javascript
+import <username>/<libraryName>/<libraryVersion> [as <alias>]
 ```
 
 在哪里：
@@ -304,9 +294,8 @@ Copiedimport <username>/<libraryName>/<libraryVersion> [as <alias>]
 
 要使用我们在上一节中发布的库，我们的下一个脚本将需要一个[import](https://www.tradingview.com/pine-script-reference/v5/#op_import)语句：
 
-```
-Pine Script™
-Copiedimport PineCoders/AllTimeHighLow/1 as allTime
+```javascript
+import PineCoders/AllTimeHighLow/1 as allTime
 ```
 
 当您键入库作者的用户名时，您可以使用编辑器的ctrl+ space/ cmd+ space“自动完成”命令显示一个弹出窗口，提供与可用库匹配的选择：
@@ -315,9 +304,8 @@ Copiedimport PineCoders/AllTimeHighLow/1 as allTime
 
 这是一个重用我们库的指标：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Using AllTimeHighLow library", "", true)
 import PineCoders/AllTimeHighLow/1 as allTime
 

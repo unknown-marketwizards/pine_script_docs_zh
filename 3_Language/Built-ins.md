@@ -68,9 +68,8 @@ Pine Script™ 具有数百个*内置*变量和函数。它们为您的脚本提
 - 该函数的作用是什么。
 - 它的签名（或定义）：
 
-```
-Pine Script™
-Copiedta.vwma(source, length) → series float
+```javascript
+ta.vwma(source, length) → series float
 ```
 
 - 它包括的参数：`source`和`length`
@@ -95,23 +94,20 @@ CopiedmyVwma = ta.vwma(close, 20)
 
 我们还可以在调用函数时使用参数名称。在函数调用中使用时，参数名称称为*关键字参数：*
 
-```
-Pine Script™
-CopiedmyVwma = ta.vwma(source = close, length = 20)
+```javascript
+myVwma = ta.vwma(source = close, length = 20)
 ```
 
 使用关键字参数时，您可以更改参数的位置，但前提是您将它们用于所有参数。当调用具有多个参数的函数（例如[indicator()）](https://www.tradingview.com/pine-script-reference/v5/#fun_indicator)时，您还可以放弃第一个参数的关键字参数，只要不跳过任何参数即可。如果您跳过某些参数，则必须使用关键字参数，以便 Pine Script™ 编译器能够找出它们对应的参数，例如：
 
-```
-Pine Script™
-Copiedindicator("Example", "Ex", true, max_bars_back = 100)
+```javascript
+indicator("Example", "Ex", true, max_bars_back = 100)
 ```
 
 以这种方式混合是不允许的：
 
-```
-Pine Script™
-Copiedindicator(precision = 3, "Example") // Compilation error!
+```javascript
+indicator(precision = 3, "Example") // Compilation error!
 ```
 
 **调用内置函数时，确保您使用的参数具有所需的限定类型至关重要，该类型因每个参数而异。**

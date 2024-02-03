@@ -6,9 +6,8 @@
 
 Pine Script™ 的运行时及其内置函数使得在许多情况下不需要循环。尚未熟悉 Pine Script™ 运行时和内置程序的新晋 Pine Script™ 程序员如果想要计算最后 10 个 [接近](https://www.tradingview.com/pine-script-reference/v5/#var_close)值的平均值，通常会编写如下代码：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Inefficient MA", "", true)
 MA_LENGTH = 10
 sumOfCloses = 0.0
@@ -20,9 +19,8 @@ plot(inefficientMA)
 
 在 Pine 中完成此类任务时，[for](https://www.tradingview.com/pine-script-reference/v5/#op_for)循环是不必要的且效率低下。应该这样做。此代码更短*并且*运行速度更快，因为它不使用循环并使用 [ta.sma()](https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma) 内置函数来完成任务：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Efficient MA", "", true)
 thePineMA = ta.sma(close, 10)
 plot(thePineMA)
@@ -30,9 +28,8 @@ plot(thePineMA)
 
 计算最后一个条中某个条件的出现次数也是 Pine Script™ 初学者经常认为必须使用循环完成的一项任务。要计算最后 10 个柱中的上涨柱数，他们将使用：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Inefficient sum")
 MA_LENGTH = 10
 upBars = 0.0
@@ -44,9 +41,8 @@ plot(upBars)
 
 在 Pine 中编写此代码的有效方法（对于程序员来说，因为它可以节省时间，实现最快加载图表，并最公平地共享我们的公共资源），是使用 math.sum [()](https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}sum) 内置函数来完成任务：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Efficient sum")
 upBars = math.sum(close > open ? 1 : 0, 10)
 plot(upBars)
@@ -71,9 +67,8 @@ plot(upBars)
 
 for[结构](https://www.tradingview.com/pine-script-reference/v5/#op_for) 允许使用计数器重复执行语句。其语法为：
 
-```
-Pine Script™
-Copied[[<declaration_mode>] [<type>] <identifier> = ]for <identifier> = <expression> to <expression>[ by <expression>]
+```javascript
+[[<declaration_mode>] [<type>] <identifier> = ]for <identifier> = <expression> to <expression>[ by <expression>]
     <local_block_loop>
 ```
 
@@ -93,9 +88,8 @@ Copied[[<declaration_mode>] [<type>] <identifier> = ]for <identifier> = <express
 
 此示例使用[for](https://www.tradingview.com/pine-script-reference/v5/#op_for) 语句来回顾用户定义的柱形数量，以确定有多少柱形的 [最高点](https://www.tradingview.com/pine-script-reference/v5/#var_high)高于或低于 图表上最后一个柱形的[最高点](https://www.tradingview.com/pine-script-reference/v5/#var_high)。这里需要一个[for](https://www.tradingview.com/pine-script-reference/v5/#op_for)循环，因为脚本只能访问图表最后一个柱上的参考值。这里，Pine Script™ 的运行时不能用于动态计算，因为脚本正在逐条执行：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`for` loop")
 lookbackInput = input.int(50, "Lookback in bars", minval = 1, maxval = 4999)
 higherBars = 0
@@ -113,9 +107,8 @@ if barstate.islast
 
 此示例在其函数中使用循环`checkLinesForBreaches()`来遍历枢轴线数组，并在价格穿过枢轴线时将其删除。这里需要一个循环，因为必须在每个柱上检查每个`hiPivotLines`和数组中的所有行`loPivotLines` ，并且没有内置函数可以为我们执行此操作：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 MAX_LINES_COUNT = 100
 indicator("Pivot line breaches", "", true, max_lines_count = MAX_LINES_COUNT)
 
@@ -179,9 +172,8 @@ checkLinesForBreaches(loPivotLines)
 
 while 结构允许重复执行语句，直到条件为假为止。其语法为：
 
-```
-Pine Script™
-Copied[[<declaration_mode>] [<type>] <identifier> = ]while <expression>
+```javascript
+[[<declaration_mode>] [<type>] <identifier> = ]while <expression>
     <local_block_loop>
 ```
 
@@ -197,9 +189,8 @@ Copied[[<declaration_mode>] [<type>] <identifier> = ]while <expression>
 
 这是使用 [while](https://www.tradingview.com/pine-script-reference/v5/#op_while)结构而不是 [for one 编写的](https://www.tradingview.com/pine-script-reference/v5/#op_for)[for](https://www.tradingview.com/pine-script-docs/en/v5/language/Loops.html#pageloops-for)部分的第一个代码示例：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("`for` loop")
 lookbackInput = input.int(50, "Lookback in bars", minval = 1, maxval = 4999)
 higherBars = 0
@@ -227,9 +218,8 @@ if barstate.islast
 
 [让我们使用while](https://www.tradingview.com/pine-script-reference/v5/#op_while)结构来计算阶乘函数 ：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("")
 int n = input.int(10, "Factorial of", minval=0)
 
@@ -253,9 +243,8 @@ plot(answer)
 - [请注意while](https://www.tradingview.com/pine-script-reference/v5/#op_while)本地块的最后一行： `fact`。它是本地块的返回值，即[while](https://www.tradingview.com/pine-script-reference/v5/#op_while) 结构最后一次迭代时的值。
 - 我们的初始化`result`不是必需的；我们这样做是为了可读性。我们也可以使用：
 
-```
-Pine Script™
-Copiedwhile counter > 0
+```javascript
+while counter > 0
     fact := fact * counter
     counter := counter - 1
     fact

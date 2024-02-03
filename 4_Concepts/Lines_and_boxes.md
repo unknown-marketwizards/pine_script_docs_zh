@@ -48,9 +48,8 @@ Pine Script™ 有助于使用 line 、 box 和 [polyline](https://www.tradingvi
 
 line.new [()](https://www.tradingview.com/pine-script-reference/v5/#fun_line.new)函数创建一个新的 [线条](https://www.tradingview.com/pine-script-reference/v5/#type_line)实例以显示在图表上。它有以下签名：
 
-```
-Pine Script™
-Copiedline.new(first_point, second_point, xloc, extend, color, style, width) → series line
+```javascript
+line.new(first_point, second_point, xloc, extend, color, style, width) → series line
 
 line.new(x1, y1, x2, y2, xloc, extend, color, style, width) → series line
 ```
@@ -85,9 +84,8 @@ line.new(x1, y1, x2, y2, xloc, extend, color, style, width) → series line
 
 ![../_images/Lines-and-boxes-Lines-Creating-lines-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Lines-Creating-lines-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Creating lines demo", overlay = true)
 
 //@variable The `chart.point` for the start of the line. Contains `index` and `time` information.
@@ -111,9 +109,8 @@ bgcolor(barstate.isconfirmed ? na : color.new(color.orange, 70), title = "Unconf
 
 ![../_images/Lines-and-boxes-Lines-Creating-lines-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Lines-Creating-lines-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Creating lines demo", "Simple projection fan", true, max_lines_count = 500)
 
 //@variable The number of fan lines drawn on each chart bar.
@@ -173,9 +170,8 @@ bgcolor(barstate.isconfirmed ? na : color.new(color.orange, 70), title = "Unconf
 
 ![../_images/Lines-and-boxes-Lines-Modifying-lines-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Lines-Modifying-lines-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Modifying lines demo", overlay = true)
 
 //@variable The size of each period.
@@ -258,9 +254,8 @@ else if not na(periodLine)
 
 ![../_images/Lines-and-boxes-Lines-Reading-line-values-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Lines-Reading-line-values-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Reading line values demo", overlay = true)
 
 //@variable The number of bars for rising and falling calculations.
@@ -308,9 +303,8 @@ plot(lineValue, "Extrapolated value", slopeColor, 3, plot.style_circles)
 
 ![../_images/Lines-and-boxes-Lines-Cloning-lines-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Lines-Cloning-lines-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Cloning lines demo", overlay = true, max_lines_count = 500)
 
 //@variable The number of bars between each new mainLine assignment.
@@ -356,9 +350,8 @@ line.set_second_point(copiedLine, chart.point.now(close))
 
 ![../_images/Lines-and-boxes-Lines-Deleting-lines-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Lines-Deleting-lines-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 
 //@variable The maximum number of lines allowed on the chart.
 const int MAX_LINES_COUNT = 500
@@ -421,9 +414,8 @@ plot(rsiMA, "EMA of RSI", color.new(color.gray, 30))
 
 box.new [()](https://www.tradingview.com/pine-script-reference/v5/#fun_box.new)函数创建一个新的 [框](https://www.tradingview.com/pine-script-reference/v5/#type_box)对象以显示在图表上。它有以下签名：
 
-```
-Pine Script™
-Copiedbox.new(top_left, bottom_right, border_color, border_width, border_style, extend, xloc, bgcolor, text, text_size, text_color, text_halign, text_valign, text_wrap, text_font_family) → series box
+```javascript
+box.new(top_left, bottom_right, border_color, border_width, border_style, extend, xloc, bgcolor, text, text_size, text_color, text_halign, text_valign, text_wrap, text_font_family) → series box
 
 box.new(left, top, right, bottom, border_color, border_width, border_style, extend, xloc, bgcolor, text, text_size, text_color, text_halign, text_valign, text_wrap, text_font_family) → series box
 ```
@@ -492,9 +484,8 @@ box.new(left, top, right, bottom, border_color, border_width, border_style, exte
 
 ![../_images/Lines-and-boxes-Boxes-Creating-boxes-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Boxes-Creating-boxes-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Creating boxes demo", overlay = true)
 
 //@variable The `chart.point` for the top-left corner of the box. Contains `index` and `time` information.
@@ -538,9 +529,8 @@ bgcolor(barstate.isconfirmed ? na : color.new(color.orange, 70), title = "Unconf
 
 ![../_images/Lines-and-boxes-Boxes-Modifying-boxes-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Boxes-Modifying-boxes-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Modifying boxes demo", "High volume boxes", true, max_boxes_count = 100)
 
 //@variable The timeframe of the calculation.
@@ -634,9 +624,8 @@ bgcolor(changeTF ? color.new(color.orange, 70) : na, title = "Timeframe change h
 
 ![../_images/Lines-and-boxes-Boxes-Reading-box-values-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Boxes-Reading-box-values-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Reading box values demo", "Nested boxes", overlay = true, max_boxes_count = 500)
 
 //@variable The number of bars in the range calculation.
@@ -701,9 +690,8 @@ if bar_index % length == 0
 
 ![../_images/Lines-and-boxes-Boxes-Cloning-boxes-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Boxes-Cloning-boxes-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Cloning boxes demo", overlay = true, max_boxes_count = 500)
 
 //@variable The number of bars between each new mainLine assignment.
@@ -747,9 +735,8 @@ else
 
 ![../_images/Lines-and-boxes-Boxes-Deleting-boxes-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Boxes-Deleting-boxes-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 
 //@variable The maximum number of boxes to show on the chart.
 const int MAX_BOXES_COUNT = 500
@@ -815,9 +802,8 @@ Pine Script™ 多段线是**高级**绘图，它 使用直线或*曲线段按�
 
 polyline.new [()](https://www.tradingview.com/pine-script-reference/v5/#fun_polyline.new) 函数创建一个新的[折线](https://www.tradingview.com/pine-script-reference/v5/#type_polyline) 实例以显示在图表上。它具有以下签名：
 
-```
-Pine Script™
-Copiedpolyline.new(points, curved, closed, xloc, line_color, fill_color, line_style, line_width) → series polyline
+```javascript
+polyline.new(points, curved, closed, xloc, line_color, fill_color, line_style, line_width) → series polyline
 ```
 
 以下八个参数影响折线绘制的行为：
@@ -860,9 +846,8 @@ Copiedpolyline.new(points, curved, closed, xloc, line_color, fill_color, line_st
 
 ![../_images/Lines-and-boxes-Polylines-Creating-polylines-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Polylines-Creating-polylines-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Creating polylines demo", "Oscillating polyline")
 
 //@variable The number of bars between each point in the drawing.
@@ -906,9 +891,8 @@ bgcolor(newPoint ? color.new(color.gray, 70) : na, title = "New point highlight"
 
 ![../_images/Lines-and-boxes-Polylines-Creating-polylines-Curved-drawings-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Polylines-Creating-polylines-Curved-drawings-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Curved drawings demo", "Smooth oscillating polyline")
 
 //@variable The number of bars between each point in the drawing.
@@ -946,9 +930,8 @@ bgcolor(newPoint ? color.new(color.gray, 70) : na, title = "New point highlight"
 
 ![../_images/Lines-and-boxes-Polylines-Creating-polylines-Curved-drawings-2.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Polylines-Creating-polylines-Curved-drawings-2.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Curved drawings demo", "Random oscillating polylines")
 
 //@variable The number of bars between each point in the drawing.
@@ -997,9 +980,8 @@ bgcolor(newPoint ? color.new(color.gray, 70) : na, title = "New point highlight"
 
 ![../_images/Lines-and-boxes-Polylines-Creating-polylines-Closed-shapes-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Polylines-Creating-polylines-Closed-shapes-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Closed shapes demo", "N-sided polygons", true)
 
 //@variable The size of the horizontal semi-axis.
@@ -1066,9 +1048,8 @@ if newPolygon
 
 ![../_images/Lines-and-boxes-Polylines-Deleting-polylines-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Polylines-Deleting-polylines-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 
 //@variable The maximum number of polylines allowed on the chart.
 const int MAX_POLYLINES_COUNT = 100
@@ -1147,9 +1128,8 @@ bgcolor(newSpiral ? color.new(color.blue, 70) : na, title = "New drawing highlig
 
 ![../_images/Lines-and-boxes-Polylines-Redrawing-polylines-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Polylines-Redrawing-polylines-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Redrawing polylines demo", "OHLC polygons", true, max_polylines_count = 100)
 
 //@variable The length of the period.
@@ -1207,9 +1187,8 @@ currentDrawing := polyline.new(
 
 ![../_images/Lines-and-boxes-Realtime-behavior-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Realtime-behavior-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Realtime behavior demo", overlay = true)
 
 //@variable Is orange when the `line` is subject to rollback and gray after the `line` is committed.
@@ -1236,9 +1215,8 @@ line.new(bar_index, hl2, bar_index + 1, hl2, color = lineColor, width = 4)
 
 ![../_images/Lines-and-boxes-Limitations-Total-number-of-objects-1.png](https://www.tradingview.com/pine-script-docs/en/v5/_images/Lines-and-boxes-Limitations-Total-number-of-objects-1.png)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Garbage collection demo", overlay = true)
 
 //@variable A new `chart.point` at the current `bar_index` and `high`.
@@ -1280,9 +1258,8 @@ polyline.new(array.from(firstPoint, secondPoint, thirdPoint), true, line_width =
 
 将[barstate.isrealtime](https://www.tradingview.com/pine-script-reference/v5/#var_barstate.isrealtime) 与绘图结合使用有时可能会产生意想不到的结果。例如，此脚本的目的是忽略所有历史柱并在*实时*柱上绘制跨越 300 个柱的水平线：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Historical buffer demo", overlay = true)
 
 //@variable A `chart.point` at the `bar_index` from 300 bars ago and current `close`.
@@ -1301,9 +1278,8 @@ Pine Script™ 包含一种在大多数情况下自动检测所需历史缓冲�
 
 解决此问题的简单方法是在评估[条件结构](https://www.tradingview.com/pine-script-docs/en/v5/language/Conditional_structures.html#pageconditionalstructures)之前使用[max_bars_back()](https://www.tradingview.com/pine-script-reference/v5/#fun_max_bars_back) 函数*显式定义*[时间](https://www.tradingview.com/pine-script-reference/v5/#var_time)序列的历史缓冲区：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Historical buffer demo", overlay = true)
 
 //@variable A `chart.point` at the `bar_index` from 300 bars ago and current `close.

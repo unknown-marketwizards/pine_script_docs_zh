@@ -32,9 +32,8 @@ Pine Script™ 中的条件结构是[if](https://www.tradingview.com/pine-script
 
 用于其副作用的[if](https://www.tradingview.com/pine-script-reference/v5/#op_if)结构具有以下语法：
 
-```
-Pine Script™
-Copiedif <expression>
+```javascript
+if <expression>
     <local_block>
 {else if <expression>
     <local_block>}
@@ -60,9 +59,8 @@ Copiedif <expression>
 
 例如，使用[if](https://www.tradingview.com/pine-script-reference/v5/#op_if) 结构的副作用对于管理策略中的订单流很有用。虽然通常可以使用调用`when`中的参数 来实现相同的功能`strategy.*()`，但使用[if](https://www.tradingview.com/pine-script-reference/v5/#op_if) 结构的代码更易于阅读：
 
-```
-Pine Script™
-Copiedif (ta.crossover(source, lower))
+```javascript
+if (ta.crossover(source, lower))
     strategy.entry("BBandLE", strategy.long, stop=lower,
                    oca_name="BollingerBands",
                    oca_type=strategy.oca.cancel, comment="BBandLE")
@@ -72,9 +70,8 @@ else
 
 可以使用 [if](https://www.tradingview.com/pine-script-reference/v5/#op_if) 结构将代码的执行限制在特定的柱上，就像我们在这里将标签的更新限制在图表的最后一个柱上一样：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 var ourLabel = label.new(bar_index, na, na, color = color(na), textcolor = color.orange)
 if barstate.islast
@@ -94,9 +91,8 @@ if barstate.islast
 
 [用于返回一个或多个值的if](https://www.tradingview.com/pine-script-reference/v5/#op_if)结构 具有以下语法：
 
-```
-Pine Script™
-Copied[<declaration_mode>] [<type>] <identifier> = if <expression>
+```javascript
+[<declaration_mode>] [<type>] <identifier> = if <expression>
     <local_block>
 {else if <expression>
     <local_block>}
@@ -116,9 +112,8 @@ Copied[<declaration_mode>] [<type>] <identifier> = if <expression>
 
 这是一个例子：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("", "", true)
 string barState = if barstate.islastconfirmedhistory
     "islastconfirmedhistory"
@@ -139,17 +134,15 @@ f_print(barState)
 
 这是一个示例，显示 当没有执行本地块时如何返回[na](https://www.tradingview.com/pine-script-reference/v5/#var_na) 。如果在这里， 则返回[na ：](https://www.tradingview.com/pine-script-reference/v5/#var_na)`close > open``false`
 
-```
-Pine Script™
-Copiedx = if close > open
+```javascript
+x = if close > open
     close
 ```
 
 脚本可以包含`if`嵌套结构`if`和其他条件结构。例如：
 
-```
-Pine Script™
-Copiedif condition1
+```javascript
+if condition1
     if condition2
         if condition3
             expression
@@ -157,9 +150,8 @@ Copiedif condition1
 
 但是，从性能角度来看，不建议嵌套这些结构。如果可能，通常更优化的做法是使用多个逻辑运算符组成单个`if`语句，而不是多个嵌套`if`块：
 
-```
-Pine Script™
-Copiedif condition1 and condition2 and condition3
+```javascript
+if condition1 and condition2 and condition3
     expression
 ```
 
@@ -169,18 +161,16 @@ Copiedif condition1 and condition2 and condition3
 
 开关 结构有两种形式[。](https://www.tradingview.com/pine-script-reference/v5/#op_switch)可以切换键表达式的不同值：
 
-```
-Pine Script™
-Copied[[<declaration_mode>] [<type>] <identifier> = ]switch <expression>
+```javascript
+[[<declaration_mode>] [<type>] <identifier> = ]switch <expression>
     {<expression> => <local_block>}
     => <local_block>
 ```
 
 另一种形式不使用表达式作为键；它打开不同表达式的求值：
 
-```
-Pine Script™
-Copied[[<declaration_mode>] [<type>] <identifier> = ]switch
+```javascript
+[[<declaration_mode>] [<type>] <identifier> = ]switch
     {<expression> => <local_block>}
     => <local_block>
 ```
@@ -206,9 +196,8 @@ Copied[[<declaration_mode>] [<type>] <identifier> = ]switch
 
 让我们看一个 使用表达式的[switch示例：](https://www.tradingview.com/pine-script-reference/v5/#op_switch)
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 indicator("Switch using an expression", "", true)
 
 string maType = input.string("EMA", "MA type", options = ["EMA", "SMA", "RMA", "WMA"])
@@ -235,9 +224,8 @@ plot(ma)
 
 这是不使用表达式的[switch](https://www.tradingview.com/pine-script-reference/v5/#op_switch)结构的示例：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Switch without an expression", "", true)
 
 bool longCondition  = ta.crossover( ta.sma(close, 14), ta.sma(close, 28))
@@ -254,9 +242,8 @@ switch
 - `longCondition`和的建筑条件`shortCondition` 是排他性的。虽然它们可以`false`同时存在，但它们不能`true`同时存在。 因此，仅执行[switch结构的](https://www.tradingview.com/pine-script-reference/v5/#op_switch)**一个**本地块这一事实对我们来说不是问题。
 - 我们在进入 [switch结构](https://www.tradingview.com/pine-script-reference/v5/#op_switch)**之前评估对**[ta.crossover()](https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossover) 和[ta.crossunder()](https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossunder) 的调用。不这样做（如以下示例所示）将阻止在每个柱上执行函数，这将导致编译器警告和不稳定的行为：
 
-```
-Pine Script™
-Copied//@version=5
+```javascript
+//@version=5
 strategy("Switch without an expression", "", true)
 
 switch
@@ -273,9 +260,8 @@ switch
 
 这段代码编译得很好，因为[close](https://www.tradingview.com/pine-script-reference/v5/#var_close) 和[open](https://www.tradingview.com/pine-script-reference/v5/#var_open)都是以下类型`float`：
 
-```
-Pine Script™
-Copiedx = if close > open
+```javascript
+x = if close > open
     close
 else
     open
@@ -283,9 +269,8 @@ else
 
 此代码无法编译，因为第一个本地块返回一个`float`值，而第二个本地块返回 a `string`，并且 - 语句的结果`if`分配给`x`变量：
 
-```
-Pine Script™
-Copied// Compilation error!
+```javascript
+// Compilation error!
 x = if close > open
     close
 else
