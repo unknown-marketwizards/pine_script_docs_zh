@@ -4,15 +4,36 @@
 
 [当if 语句](https://www.tradingview.com/pine-script-reference/v5/#op_if)内的缩进代码对于编译器来说太大时，就会出现此错误。由于编译器的工作方式，您不会收到一条消息，告诉您到底有多少行代码超出了限制。现在唯一的解决方案是将[if 语句](https://www.tradingview.com/pine-script-reference/v5/#op_if)分解为更小的部分（函数或更小的[if 语句](https://www.tradingview.com/pine-script-reference/v5/#op_if)）。下面的示例显示了一个相当长的[if 语句](https://www.tradingview.com/pine-script-reference/v5/#op_if)；理论上，这会抛出：`line 4: if statement is too long`
 
-| ` 1 2 3 4 5 6 7 8 9 10 11 12` | `Pine Script™Copied//@version=5indicator("My script")var e = 0if barstate.islast  a = 1  b = 2  c = 3  d = 4  e := a + b + c + dplot(e)` |
-| ----------------------------- | ------------------------------------------------------------ |
-|                               |                                                              |
+```javascript
+//@version=5
+indicator("My script")
+var e = 0
+if barstate.islast 
+  a = 1  
+  b = 2  
+  c = 3  
+  d = 4 
+  e := a + b + c + d
+plot(e)
+```
 
 要修复此代码，您可以将这些行移动到它们自己的函数中：
 
-| ` 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16` | `Pine Script™Copied//@version=5indicator("My script")var e = 0doSomeWork() =>  a = 1  b = 2  c = 3  d = 4  result = a + b + c + dif barstate.islast  e := doSomeWork()plot(e)` |
-| ----------------------------------------- | ------------------------------------------------------------ |
-|                                           |                                                              |
+```javascript
+//@version=5
+indicator("My script")
+var e = 0
+doSomeWork() => 
+  a = 1  
+  b = 2  
+  c = 3  
+  d = 4  
+  result = a + b + c + d
+if barstate.islast  
+	e := doSomeWork()
+plot(e)
+```
+
 
 ## [脚本请求太多证券：Script requesting too many securities](https://www.tradingview.com/pine-script-docs/en/v5/Error_messages.html#id2)
 
@@ -65,8 +86,9 @@ study("title")
 与 相同，但知道那个地方应该有什么。例子：`no viable alternative`
 
 ```Pine Script™Copied
-//@version=5indicator("My Script")  plot(1)
-
+//@version=5
+indicator("My Script") 
+plot(1)
 ```
 line 3: mismatched input 'plot' expecting 'end of line without line continuation'
 
@@ -74,7 +96,8 @@ line 3: mismatched input 'plot' expecting 'end of line without line continuation
 `plot`要解决此问题，您应该在没有缩进的情况下以新行开始：
 
 ```Pine Script™Copied
-//@version=5indicator("My Script")
+//@version=5
+indicator("My Script")
 plot(1)
 ```
 
@@ -206,4 +229,4 @@ f(off) =>
 plot(f(301))
 ```
 
-当使用引用之前柱形图 至`bar_index[n]`和的绘图时，从该柱形图接收的时间序列将用于在时间轴上定位绘图。因此，如果无法确定缓冲区的正确大小，则可能会发生此错误。为了避免这种情况，您需要使用.有关[绘图的](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Lines_and_boxes.html#pagelinesandboxes-limitations-historicalbufferandmaxbarsback)部分更详细地描述了此行为。`xloc = xloc.bar_index``max_bars_back(time, n)
+当使用引用之前柱形图 至`bar_index[n]`和的绘图时，从该柱形图接收的时间序列将用于在时间轴上定位绘图。因此，如果无法确定缓冲区的正确大小，则可能会发生此错误。为了避免这种情况，您需要使用.有关[绘图的](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Lines_and_boxes.html#pagelinesandboxes-limitations-historicalbufferandmaxbarsback)部分更详细地描述了此行为。`xloc = xloc.bar_index`max_bars_back(time, n)
