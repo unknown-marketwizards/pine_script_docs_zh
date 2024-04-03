@@ -1,1 +1,5 @@
 .DS_Store
+.docsifytopdfrc.js
+node_modules/
+package-lock.json
+package.json
