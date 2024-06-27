@@ -1,4 +1,8 @@
-# Pine v5 中文版用户手册
+# Pine v5 中文版用户手册V2
+> [在线浏览](https://pine-script-docs-zh.netlify.app)
+
+# Pine v5 中文版用户手册V1
+
 
 > [在线浏览](https://unknown-marketwizards.github.io/pine_script_docs_zh)
 
