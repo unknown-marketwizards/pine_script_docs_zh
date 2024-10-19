@@ -91,3 +91,6 @@ cd pine_script_docs_zh && python -m SimpleHTTPServer 3000
 [docsify英文版文档](https://docsify.js.org/#/quickstart)
 
 
+## 打赏
+[二维码](./static/reward/readme.md)
+[打赏名单](./static/reward/readme.md)
