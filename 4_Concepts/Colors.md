@@ -51,7 +51,7 @@ Pine Script™ 中的每种颜色均由四个值定义：
 
 Pine Script™ 有 17 种内置颜色。此表列出了它们的名称、十六进制等效值以及作为[color.rgb()](https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}rgb)参数的 RGB 值：
 
-| 姓名   | 十六进制 | RGB 值                   |
+| 名称   | 十六进制 | RGB 值                   |
 | :----- | :------- | :----------------------- |
 | 水色   | #00BCD4  | color.rgb(0, 188, 212)   |
 | 黑色   | #363A45  | color.rgb(54, 58, 69)    |

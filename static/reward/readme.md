@@ -2,14 +2,10 @@
 【注意】请您打赏时留名&备注一下，万分感谢！
 
 ## 微信
-<p align = "center">
 <img  src="./wechat_reward.jpg" width="250" />
-</p>
 
 ## 支付宝
-<p align = "center">
 <img  src="./alipay_reward.jpg" width="270" />
-</p>
 
 
 # 赞助名单
